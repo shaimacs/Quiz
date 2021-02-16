@@ -9,8 +9,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+
 def index(request):
     return HttpResponse('<h1>Hello World! /ᐠ｡‸｡ᐟ\ﾉ</h1>')
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -19,7 +21,7 @@ def login_view(request):
         if form.is_valid():
             u = form.cleaned_data['username']
             p = form.cleaned_data['password']
-            user = authenticate(username = u, password = p)
+            user = authenticate(username=u, password=p)
             if user is not None:
                 if user. is_active:
                     login(request, user)
@@ -31,3 +33,23 @@ def login_view(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            print('HEY', user.username)
+            return HttpResponseRedirect('/user/'+str(user))
+        else:
+            HttpResponse('<h1>Try Again</h1>')
+    else:
+        form = UserCreationForm()
+        return render(request, 'signup.html', {'form': form})
