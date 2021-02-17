@@ -1,15 +1,11 @@
 <!-- main_app/templates/quiz/show.html -->
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-
 <div class="card-content">
     <span class="card-title">{{ quiz.name }}</span>
-
     <!-- Add links for update and delete here... -->
     <a href="{% url 'quiz_update' quiz.id %}">Update Details</a> | 
     <a href="{% url 'quiz_delete' quiz.id %}">DELETE This quiz</a>
 </div>
-
 {% endblock %}

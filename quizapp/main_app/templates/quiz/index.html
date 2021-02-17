@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 <a href="/quiz/create">Add a New quiz!</a>
 <hr />
@@ -8,14 +7,6 @@
 <a href="/quiz/{{quiz.id}}">
     <p>Name: {{ quiz.name }}</p>
 </a>
-<!-- <a href="/user/{{quiz.user.username}}">
-    <p>Adopted By: {{quiz.user.username }}</p>
-</a>
-{% if quiz.age > 0 %}
-<p>Age: {{ quiz.age }}</p>
-{% else %}
-<p>Age: Kitten</p>
-{% endif %} -->
 <hr />
 {% endfor %}
 <form action="post_url/" method="post">
