@@ -17,6 +17,7 @@ import json
 def index(request):
     return render(request, 'index.html')
 
+
 def quiz_index(request):
     quiz = Quiz.objects.all()
     return render(request, 'quiz/index.html', {'quiz': quiz})
@@ -108,7 +109,6 @@ def category(request):
 
 
 
-
 def login_view(request):
     if request.method == 'POST':
         # if post, then authenticate (user submitted username and password)
@@ -148,3 +148,9 @@ def signup(request):
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
+
+def question(request):
+    return render(request, 'Questions.html')
+
+def result(request):
+    return render(request, 'Result.html')

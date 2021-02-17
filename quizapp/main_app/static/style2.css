@@ -9,7 +9,6 @@
     src: url("two.otf");
     font-family: fontone;
 }
-
 body{
     background-image: url(images/nasty_fabric_@2X.png);
     height: 100vh;
@@ -18,10 +17,10 @@ body{
     z-index: 1;
     background-position: bottom center;
     background-size: cover;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
+    background-color: rgb(204, 204, 204);
 
 }
-
 h1{
     font-family: fontitis;
     margin-top: 100px;
@@ -30,7 +29,7 @@ h1{
 .colorone{
     background-color: rgb(228, 228, 228);
     margin-top: 100px;
-    height: 650px;
+    height: 800px;
 }
 
 .cen{
@@ -47,8 +46,8 @@ h1{
 
 .margin-sm{
     margin-top: 50px;
-    font-family: fontone;
-    font-size: 20px;
+    
+    
 }
 
 margin-bt{
@@ -57,13 +56,13 @@ margin-bt{
 
 .style1{
     border: 2px solid rgb(167, 167, 167);
-     padding: 50px; 
-     margin-left: 65px;
+     padding: 50px; margin-left: 0px;
      border-radius: 20px;
      font-weight: 800;
 }
 
 .col1{
+
     background-color: rgb(91, 91, 248);
     color: white;
     border: 2px solid rgb(91, 91, 248);
@@ -73,23 +72,38 @@ margin-bt{
     color: white;
     border: 2px solid rgb(255, 184, 77);
 }
-.col3{
-    background-color: rgb(255, 118, 100);
-    color: white;
-    border: 2px solid rgb(255, 118, 100);
-}
+
 .col4{
     background-color: rgb(96, 180, 48);
     color: white;
     border: 2px solid rgb(96, 180, 48);
 }
 .col5{
-    background-color: rgb(41, 41, 41);
+    background-color:  rgb(255, 118, 100);
     color: white;
-    border: 2px solid rgb(41, 41, 41);
+    border: 2px solid  rgb(255, 118, 100);
 }
-.col6{
-    background-color: rgb(57, 13, 129);
-    color: white;
-    border: 2px solid rgb(57, 13, 129);
+
+
+
+.makehigh{
+    font-family: fontone;
+    font-size: 18px;
+}
+
+.fontby{
+         
+    font-family: fontone;
+    font-size: 18px;
+}
+
+
+.butttwo{
+    background-color: rgb(0, 0, 0) !important;
+    border: 2px solid rgb(0, 0, 0) !important;
+    border-radius: 50px !important;
+    width: 200px;
+    margin-top: 50px;
+  
+
 }
