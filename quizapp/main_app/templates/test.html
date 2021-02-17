@@ -1,0 +1,24 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>QuizApp</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+</head>
+
+<body>
+  
+    <h1>Api TEST</h1>
+    {% for c in categories %}
+<p>Data => {{ c }}</p>
+{% endfor %}
+<!-- <p>HHH {{num}}</p> -->
+    <footer>
+        All Rights Reserved, QuizApp 2021
+    </footer>
+</body>
+
+</html>

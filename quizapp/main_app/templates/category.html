@@ -1,0 +1,29 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>QuizApp</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+</head>
+
+<body>
+  
+    <h1>Categories</h1>
+    <!-- {% for q in results %}
+<p>Data => {{ q.question }}</p>
+{% endfor %} -->
+<form action="" method="POST">
+    {% csrf_token %}
+    <button type="submit" name='cat' value="9"><a href="{% url 'test' 9 %}">General Knowledge</a> </button>
+    <button type="submit" name='cat' value="10">Entertainment: Books</button>
+</form>
+
+    <footer>
+        All Rights Reserved, QuizApp 2021
+    </footer>
+</body>
+
+</html>
