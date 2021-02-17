@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -7,6 +8,7 @@ class Quiz(models.Model):
     score = models.IntegerField()
     Time = models.IntegerField()
     winStreak = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Questions(models.Model):

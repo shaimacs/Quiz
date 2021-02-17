@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ username }}'s collection:</h1>
+
+{% for quiz in quiz %}
+<a href="/quiz/{{ quiz.id }}">
+    <h3>{{ quiz.name }}</h3>
+</a>
+
+{% endfor %}
+
+{% endblock %}

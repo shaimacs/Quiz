@@ -12,8 +12,10 @@
             <i class="fas fa-brain mr-2"></i>Take Quiz & Challenge Yourself
           </h2>
         </div>
+        
         <div class="menu_item">
           <div class="row">
+            {% for c in categories %}
             <div
               class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
             >
@@ -26,13 +28,15 @@
                 "
                 class="text-center p-5 bg-info text-white"
               >
-                <i class="fas fa-city mr-2"></i> City Capital
+                <i class="fas fa-city mr-2"></i> {{c}}
               </div>
             </div>
-            <div
+            {% endfor %}
+
+            <!-- <div
               class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
+            > -->
+              <!-- <div
                 style="
                   width: 95%;
                   font-weight: 600;
@@ -40,8 +44,8 @@
                   border-radius: 10px;
                 "
                 class="text-center p-5 bg-success text-white"
-              >
-                <i class="fas fa-vials mr-2"></i> Science
+              > -->
+                <!-- <i class="fas fa-vials mr-2"></i> Science
               </div>
             </div>
             <div
@@ -103,7 +107,7 @@
               >
                 <i class="fas fa-paint-brush mr-2"></i> Creative Art
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

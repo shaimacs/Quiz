@@ -14,8 +14,8 @@ import requests
 import json
 
 
-def index(request):
-    return render(request, 'index.html')
+# def index(request):
+#     return render(request, 'index.html')
 
 
 def quiz_index(request):
@@ -23,8 +23,10 @@ def quiz_index(request):
     return render(request, 'quiz/index.html', {'quiz': quiz})
 
 def quiz_show(request, quiz_id):
-        quiz = Quiz.objects.get(id=quiz_id)
-        return render(request, 'quiz/show.html', {'quiz': quiz})
+    quiz = Quiz.objects.get(id=quiz_id)
+    return render(request, 'quiz/show.html', {'quiz': quiz})
+
+
 class QuizCreate(CreateView):
     model = Quiz
     fields = '__all__'
@@ -88,11 +90,11 @@ class CategoryDelete(DeleteView):
     success_url = '/category'
 
 
-def test(request):
+def category(request):
     categories = []
 
     for i in range(1,33):
-        response = requests.get('https://opentdb.com/api.php?amount=10&category={}&difficulty=easy&type=multiple'.format(i))
+        response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(i))
         # qus_data=response.json()
         res =json.loads(response.text)
         if (len(res["results"]) < 1 ):
@@ -100,12 +102,15 @@ def test(request):
         else:
             categories.append(res["results"][0]["category"])
         
-    return render(request,'test.html',{
+    return render(request,'index.html',{
         'categories': categories
     })
+    
+def levels(request):
+    return render(request,'levels.html')
 
-def category(request):
-     return render(request,'category.html')
+
+
 
 
 
@@ -148,6 +153,12 @@ def signup(request):
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
+    
+def Profile(request, username):
+    user = User.objects.get(username=username)
+    quiz = Quiz.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'quiz': quiz})
+
 
 def question(request):
     return render(request, 'Questions.html')
