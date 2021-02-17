@@ -15,10 +15,12 @@
         
         <div class="menu_item">
           <div class="row">
-            {% for c in categories %}
+            {% for category in categories %}
+            <a href="{% url 'levels' %}">
             <div
               class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
             >
+            
               <div
                 style="
                   width: 95%;
@@ -28,9 +30,11 @@
                 "
                 class="text-center p-5 bg-info text-white"
               >
-                <i class="fas fa-city mr-2"></i> {{c}}
+                <i class="fas fa-city mr-2"></i> {{category}}
               </div>
+            </a>
             </div>
+          
             {% endfor %}
 
             <!-- <div

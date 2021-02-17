@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
- 
   <head>    
-    <title>Home Page</title>     
+    <title>levels Page</title>     
   </head>
   <body>
     <div>
@@ -12,11 +11,10 @@
             <i class="fas fa-brain mr-2"></i>Take Quiz & Challenge Yourself
           </h2>
         </div>
-        
         <div class="menu_item">
-          <div class="column">
+          <div class="row">
             <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+              class="col-12 col-sm-4 mx-auto  mb-3 d-flex justify-content-center align-items-center"
             >
               <div
                 style="
@@ -29,10 +27,10 @@
               >
                 <i class="fas fa-city mr-2"></i> Easy
               </div>
-            </div>
-
+            </div> 
+            </div>  <div class="row"> 
             <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+              class="col-12 col-sm-4 mx-auto  mb-3 d-flex justify-content-center align-items-center"
             >
               <div
                 style="
@@ -46,8 +44,10 @@
                 <i class="fas fa-vials mr-2"></i> Medium
               </div>
             </div>
+            </div>
+            <div class="row"> 
             <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+              class="col-12 col-sm-4 mx-auto  mb-3 d-flex justify-content-center align-items-center"
             >
               <div
                 style="
@@ -61,12 +61,10 @@
                 <i class="fas fa-quote-right mr-2"></i> Hard
               </div>
             </div>
-           
+            </div>
           </div>
         </div>
       </div>
     </div>
   </body>
- 
-
 {% endblock %}

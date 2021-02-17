@@ -92,8 +92,8 @@ class CategoryDelete(DeleteView):
 
 def category(request):
     categories = []
-
-    for i in range(1,33):
+#fix this to (9,33)
+    for i in range(9,14):
         response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(i))
         # qus_data=response.json()
         res =json.loads(response.text)
@@ -161,7 +161,17 @@ def Profile(request, username):
 
 
 def question(request):
-    return render(request, 'Questions.html')
+    options=set()
+    response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(9))
+    res =json.loads(response.text)
+    options.add(res['results'][0]['correct_answer'])
+
+    for i in res['results'][0]['incorrect_answers']:
+        options.add(i)
+    return render(request, 'Questions.html',{
+        'question':res["results"][0]["question"],
+        'options':options
+        })
 
 def result(request):
     return render(request, 'Result.html')
