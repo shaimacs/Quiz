@@ -1,5 +1,7 @@
 from django.shortcuts import render
-# from .models import Quiz
+from .models import Quiz
+from .models import Questions
+from .models import Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -13,7 +15,76 @@ import json
 
 
 def index(request):
-    return HttpResponse('<h1>Hello World! /ᐠ｡‸｡ᐟ\ﾉ</h1>')
+    return render(request, 'index.html')
+
+def quiz_index(request):
+    quiz = Quiz.objects.all()
+    return render(request, 'quiz/index.html', {'quiz': quiz})
+
+def quiz_show(request, quiz_id):
+        quiz = Quiz.objects.get(id=quiz_id)
+        return render(request, 'quiz/show.html', {'quiz': quiz})
+class QuizCreate(CreateView):
+    model = Quiz
+    fields = '__all__'
+    success_url = '/quiz'
+
+
+class QuestionsCreate(CreateView):
+    model = Questions
+    fields = '__all__'
+    success_url = '/questions'
+
+
+class CategoryCreate(CreateView):
+    model = Category
+    fields = '__all__'
+    success_url = '/category'
+
+
+class QuizUpdate(UpdateView):
+    model = Quiz
+    fields = '__all__'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/quiz/' + str(self.object.pk))
+
+
+class QuestionsUpdate(UpdateView):
+    model = Questions
+    fields = '__all__'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/questions/' + str(self.object.pk))
+
+
+class CategoryUpdate(UpdateView):
+    model = Category
+    fields = '__all__'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return HttpResponseRedirect('/category/' + str(self.object.pk))
+
+
+class QuizDelete(DeleteView):
+    model = Quiz
+    success_url = '/quiz'
+
+
+class QuestionsDelete(DeleteView):
+    model = Questions
+    success_url = '/questions'
+
+
+class CategoryDelete(DeleteView):
+    model = Category
+    success_url = '/category'
 
 
 def test(request):
