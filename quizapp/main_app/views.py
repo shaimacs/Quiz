@@ -206,7 +206,9 @@ def html_decode(s):
         s = s.replace(code[1], code[0])
     return s
 
-
 def result(request):
     return render(request, 'Result.html')
+
+def top_five(request):
+    return render(request, 'top.html')
 

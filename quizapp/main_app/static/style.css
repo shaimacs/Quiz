@@ -97,3 +97,104 @@ margin-bt{
     color: white;
     border: 2px solid rgb(57, 13, 129);
 }
+
+/* Podium CSS */
+@font-face {
+    font-family: DaggerSquare;
+    src: url('fonts/podium-font.woff') format('woff'),
+      url('fonts/podium-font.ttf') format('truetype');
+  }
+
+  #podium-box {
+    margin: 0 auto;
+    display: flex;
+  }
+
+  .podium-number {
+    font-family: DaggerSquare;
+    font-weight: bold;
+    font-size: 4em;
+    color: white;
+  }
+
+  .step-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step-container > div:first-child {
+    margin-top: auto;
+    text-align: center;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 10px;
+    border: 3px solid #c24dfd;
+    border-bottom: 0px;
+    box-shadow: 1px 3px 10px #473650;
+  }
+
+  .bg-blue {
+    background-color: #ac18f7;
+  }
+
+  #first-step {
+    height: 100%;
+    z-index: 100;
+  }
+  #fourth-step {
+    height: 45%;
+    border-left: 0px;
+  }
+  #fifth-step {
+    height: 35%;
+    border-right: 0px;
+  }
+  #second-step {
+    height: 75%;
+    border-right: 0px;
+  }
+
+  #third-step {
+    height: 65%;
+    border-left: 0px;
+    z-index: 90;
+  }
+  .winner_name {
+    font-weight: 500;
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    transform: rotate(-10deg);
+
+    -webkit-transform: rotate(-10deg);
+
+    -moz-transform: rotate(-10deg);
+
+    -ms-transform: rotate(-10deg);
+
+    -o-transform: rotate(-10deg);
+
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    text-shadow: 2px 2px 2px black;
+  }
+  .top_wrapper {
+    background-color: #6c08ca;
+     
+  }
+  .trophy {
+    color: rgb(250, 171, 74);
+    text-shadow: 2px 2px 2px black;
+  }
+
+  .top5_text {
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 5px rgb(43, 42, 42);
+    padding: 0 20px;
+    margin-top: -10px;
+  }
