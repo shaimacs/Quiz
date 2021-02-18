@@ -92,26 +92,38 @@ class CategoryDelete(DeleteView):
 
 def category(request):
     categories = []
+    cat=''
+    idd=[]
 #fix this to (9,33)
     for i in range(9,14):
         response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(i))
+       
         # qus_data=response.json()
+        id_response = requests.get('https://opentdb.com/api_category.php')
+        id_res =json.loads(id_response.text)
         res =json.loads(response.text)
-        if (len(res["results"]) < 1 ):
-            pass
-        else:
-            categories.append(res["results"][0]["category"])
-        
+
+        for i in id_res['trivia_categories']:
+            if(res["results"][0]["category"] == i['name']):
+                idd=i['id']
+                cat=i['name']
+                if (len(res["results"]) < 1 ):
+                    pass
+                else:
+                    categories.append({'name':res["results"][0]["category"],'id':idd})
+                break
+
+    # idd=8
+
     return render(request,'index.html',{
-        'categories': categories
+        'categories': categories,
+        'id':idd,
+        'name':cat
     })
     
-def levels(request):
-    return render(request,'levels.html')
+def levels(request,id):
 
-
-
-
+    return render(request,'levels.html',{'id':id})
 
 
 def login_view(request):
@@ -160,17 +172,19 @@ def Profile(request, username):
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
 
 
-def question(request):
+def question(request,category_num,dif):
     options=set()
-    response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(9))
+    response = requests.get('https://opentdb.com/api.php?amount=10&category={}&difficulty={}&type=multiple'.format(category_num,dif))
     res =json.loads(response.text)
+    #put all answers in set 
     options.add(res['results'][0]['correct_answer'])
 
     for i in res['results'][0]['incorrect_answers']:
         options.add(i)
+
     return render(request, 'Questions.html',{
         'question':res["results"][0]["question"],
-        'options':options
+        'options':options,
         })
 
 def result(request):

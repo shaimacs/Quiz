@@ -7,7 +7,7 @@ urlpatterns = [
     path('quiz/create/', views.QuizCreate.as_view(), name='quiz_create'),
     path('quiz/<int:pk>/update/', views.QuizUpdate.as_view(), name='quiz_update'),
     path('quiz/<int:pk>/delete/', views.QuizDelete.as_view(), name='quiz_delete'),
-    path('question/', views.question, name='question'),
+    path('levels/question/<int:category_num>/<dif>', views.question, name='question'),
     path('questions/create/', views.QuestionsCreate.as_view(), name='questions_create'),
     path('questions/<int:pk>/update/', views.QuestionsUpdate.as_view(), name='questions_update'),
     path('questions/<int:pk>/delete/', views.QuestionsDelete.as_view(), name='questions_delete'),
@@ -19,5 +19,5 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('user/<username>/', views.Profile, name='profile'),
     path('category/', views.category, name='category'),
-    path('levels/', views.levels, name='levels')
+    path('levels/<int:id>', views.levels, name='levels')
 ]
