@@ -21,12 +21,14 @@
           </div>
         </div>
       </div>
-      <div class="menu_item">
-        <div class="row">
+      <div class="menu_item" >
+        <div class="row" >
           {% for option in options %}
+         
           <div
             class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
           >
+          
             <div
               style="
                 width: 95%;
@@ -34,14 +36,17 @@
                 border: 1px solid#ddd;
                 border-radius: 10px;
               "
-              class="text-center p-5"
+              class="text-center p-5" 
             >
               
-              <p> {{ option }}</p>
+              <p id='click'> {{ option }}</p>
               
             </div>
           </div>
           {% endfor %}
+          <p id='click'> {{ correct_answer }}</p>
+
+          <button type="submit">Submit</button>
           <!-- <div
             class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
           >
@@ -100,5 +105,27 @@
       </div>
     </div>
   </div>
+  <script>
+
+$('p').click(function (event) {
+
+  
+// Don't follow the link
+event.preventDefault();
+
+// Log the clicked element in the console
+console.log(event.target.innerText);
+ans =event.target.innerText
+if(ans === '{{ correct_answer }}'){
+  console.log('TRUUE');
+}
+else{
+  console.log('FALSE')
+}
+
+
+});
+
+  </script>
 </body>
 {% endblock %}

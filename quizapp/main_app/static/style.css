@@ -18,7 +18,9 @@ body{
     z-index: 1;
     background-position: bottom center;
     background-size: cover;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat; 
+    color: brown;
+  
 
 }
 
@@ -35,8 +37,6 @@ h1{
 
 .cen{
     
-
-
     margin: 0 auto;
     align-items: center;
     justify-content: space-around;
@@ -62,6 +62,10 @@ margin-bt{
      border-radius: 20px;
      font-weight: 800;
 }
+#click{
+    cursor: grab;
+}
+
 
 .col1{
     background-color: rgb(91, 91, 248);

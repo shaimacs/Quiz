@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 import requests
 import json
+import re
+
 
 
 # def index(request):
@@ -182,10 +184,29 @@ def question(request,category_num,dif):
     for i in res['results'][0]['incorrect_answers']:
         options.add(i)
 
+    question=res["results"][0]["question"]
+    question = html_decode(question)
     return render(request, 'Questions.html',{
-        'question':res["results"][0]["question"],
+        'question':question,
         'options':options,
+        'correct_answer':res['results'][0]['correct_answer']
         })
 
+def html_decode(s):
+  
+    htmlCodes = (
+            ("'", '&#39;'),
+            ('"', '&quot;'),
+            ('>', '&gt;'),
+            ('<', '&lt;'),
+            ('&', '&amp;'),
+            ("'", '&#039;')
+        )
+    for code in htmlCodes:
+        s = s.replace(code[1], code[0])
+    return s
+
+
 def result(request):
+
     return render(request, 'Result.html')
