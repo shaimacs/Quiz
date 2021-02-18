@@ -1,96 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <body>
-    <div>
-      <div class="container">
-        <div class="header text-center mb-5">
-          <h3 class="p-3 text-center bg-primary text-white">Science</h3>
-        </div>
-        <div class="row">
-          <div class="col-12 mb-2">
-            <div
-              class="d-flex align-items-center p-1"
-              style="margin-left: 9px; border-bottom: 2px solid #ddd"
-            >
-              <i class="fas font-weight-bold text-danger fa-question mr-3" style="font-size: 2rem;"></i>
-              <h5>Question 1</h5>
-            </div>
-          </div>
-        </div>
-        <div class="menu_item">
-          <div class="row">
-            <div
-              class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5"
-              >
-                Option 1
-              </div>
-            </div>
-            <div
-              class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5"
-              >
-                Option 2
-              </div>
-            </div>
-            <div
-              class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5"
-              >
-                Option 3
-              </div>
-            </div>
-            <div
-              class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5"
-              >
-                Option 4
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div style="margin-left: 10px">
-              <button class="btn btn-outline-warning">
-                Need Help<i class="fas fa-question ml-2"></i>
-              </button>
-            </div>
-=======
-{% extends 'base.html' %} {% block content %}
-<body>
+  <audio id="CorrectAnswer" src="https://www.myinstants.com/instant/correct-answer/embed/"> 
+  <audio id="WrongAnswer" src="https://www.myinstants.com/instant/correct-answer/embed/"> 
+</audio>
   <div>
     <div class="container">
       <div class="header text-center mb-5">
@@ -115,74 +28,22 @@
       <div class="menu_item" >
         <div class="row" >
           {% for option in options %}
-         
           <div
             class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-          >
-          
+            id = "AnswersDiv">
             <div
               style="
                 width: 95%;
                 font-weight: 600;
                 border: 1px solid#ddd;
-                border-radius: 10px;
-              "
-              class="text-center p-5" 
-            >
-              
+                border-radius: 10px;"
+              class="text-center p-5">
               <p id='click'> {{ option }}</p>
-              
             </div>
           </div>
           {% endfor %}
           <p id='click'> {{ correct_answer }}</p>
-
           <button type="submit">Submit</button>
-          <!-- <div
-            class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-          >
-            <div
-              style="
-                width: 95%;
-                font-weight: 600;
-                border: 1px solid#ddd;
-                border-radius: 10px;
-              "
-              class="text-center p-5"
-            >
-              Option 2
-            </div>
-          </div>
-          <div
-            class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-          >
-            <div
-              style="
-                width: 95%;
-                font-weight: 600;
-                border: 1px solid#ddd;
-                border-radius: 10px;
-              "
-              class="text-center p-5"
-            >
-              Option 3
-            </div>
-          </div>
-          <div
-            class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-          >
-            <div
-              style="
-                width: 95%;
-                font-weight: 600;
-                border: 1px solid#ddd;
-                border-radius: 10px;
-              "
-              class="text-center p-5"
-            >
-              Option 4
-            </div>
-          </div> -->
         </div>
       </div>
       <div class="row">
@@ -191,37 +52,35 @@
             <button class="btn btn-outline-warning">
               Need Help<i class="fas fa-question ml-2"></i>
             </button>
-
           </div>
         </div>
       </div>
     </div>
-
   </body>
-{% endblock %}
-
   </div>
   <script>
-
 $('p').click(function (event) {
-
-  
 // Don't follow the link
 event.preventDefault();
-
 // Log the clicked element in the console
 console.log(event.target.innerText);
-ans =event.target.innerText
+ans=event.target.innerText
 if(ans === '{{ correct_answer }}'){
-  console.log('TRUUE');
+  console.log('TRUE');
+  // Div color > Green 
+  event.target.style.backgroundColor = 'Green';
+  // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
+  document.querySelector("#CorrectAnswer").play()
+  // console.log(document.querySelector("#CorrectAnswer").play())
+  
+  
 }
 else{
   console.log('FALSE')
+  // Div color > Red 
+  event.target.style.backgroundColor = 'Red';
 }
-
-
 });
-
   </script>
 </body>
 {% endblock %}
