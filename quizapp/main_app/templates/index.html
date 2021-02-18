@@ -15,18 +15,33 @@
         <div class="menu_item">
           <div class="row">
             {% for category in categories %}
-            <a href="{% url 'levels' %}">
             <div class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center">
-            
+              <a href="{% url 'levels' %}">            
               <div
                 style="
-                  width: 95%;
+                  width: 200px;
+                  height: 150px;
                   font-weight: 600;
                   border: 1px solid#ddd;
                   border-radius: 10px;
+                  padding: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;                  
                 "
-                class="text-center p-5 bg-info text-white">
-                <i class="fas fa-city mr-2"></i> {{category}}
+                {% if category == 'General Knowledge' %}
+                class="text-center bg-info text-white"
+                {% elif category == 'Entertainment: Books' %}
+                class="text-center bg-success text-white"
+                {% elif category == 'Entertainment: Film' %}
+                class="text-center bg-danger text-white"
+                {% elif category == 'Entertainment: Music' %}
+                class="text-center bg-warning text-white"
+                {% elif category == 'Entertainment: Musicals & Theatres' %}
+                class="text-center bg-dark text-white"               
+                {% endif %}
+               >
+               <span class="cat_card"> {{category}}</span>
               </div>
             </a>
             </div>

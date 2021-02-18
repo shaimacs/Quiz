@@ -5,7 +5,7 @@ from .models import Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
-from .forms import LoginForm
+from .forms import LoginForm, CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -16,8 +16,8 @@ import re
 
 
 
-# def index(request):
-#     return render(request, 'index.html')
+def index(request):
+    return render(request, 'welcome.html')
 
 
 def quiz_index(request):
@@ -156,7 +156,7 @@ def logout_view(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -165,7 +165,7 @@ def signup(request):
         else:
             HttpResponse('<h1>Try Again</h1>')
     else:
-        form = UserCreationForm()
+        form = CreateUserForm()
         return render(request, 'signup.html', {'form': form})
     
 def Profile(request, username):
@@ -208,5 +208,5 @@ def html_decode(s):
 
 
 def result(request):
-
     return render(request, 'Result.html')
+

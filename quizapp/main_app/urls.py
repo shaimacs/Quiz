@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
-    # path('', views.index, name='index'),
+    path('', views.index, name='index'),
     path('quiz/', views.quiz_index, name='quiz_index'),
     path('quiz/<int:quiz_id>/', views.quiz_show, name='quiz_show'),
     path('quiz/create/', views.QuizCreate.as_view(), name='quiz_create'),
@@ -19,5 +21,11 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('user/<username>/', views.Profile, name='profile'),
     path('category/', views.category, name='category'),
+    path('result/', views.result, name='result'),
+#     path('levels/', views.levels, name='levels'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(),name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
+    path('reset/done/',auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
     path('levels/<int:id>', views.levels, name='levels')
 ]
