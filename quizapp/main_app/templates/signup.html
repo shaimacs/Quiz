@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Sign up</h2>
 <form action="{% url 'signup' %}" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
+    <!-- {{ form.as_p }} -->
+    <form>
+        <div class="main1">
+            <form class="form1">
+            <p><label for="id_username"></label> <input class="un "type="text" align="center" placeholder="Username" name="username" maxlength="150" autofocus required id="id_username"> 
+            <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
+              <p><label for="id_email"></label> <input class ="email" type="email" name="email" maxlength="254" id="id_email"placeholder="Email Address:"></p>
+              <p><label for="id_password1" placeholder="Password "></label>
+            <input class = "password" type="password" name="password1" autocomplete="new-password" required id="id_password1" placeholder="Password"> 
+            <span class="helptext"><ul><li>Your password can’t be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li>
+                <li>Your password can’t be entirely numeric.</li></ul></span></p>
+            <p><label for="id_password2" ></label> 
+                <input class ="password" type="password" name="password2" autocomplete="new-password" required id="id_password2"placeholder="Password Confirmation"> 
+                <span class="helptext">Enter the same password as before, for verification.</span></p>
+            <a class="submit" >Sign up</a>    
+        </div>
+    </form>
 </form>
 {% endblock %}

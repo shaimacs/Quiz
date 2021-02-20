@@ -17,6 +17,7 @@ class Questions(models.Model):
     correctAnswer = models.CharField(max_length=150)
     Level = models.CharField(max_length=150)
     hint = models.CharField(max_length=150)
+    # time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
 
 class Category(models.Model):
     name = models.CharField(max_length=150)

@@ -14,11 +14,8 @@ import requests
 import json
 import re
 
-
-
 def index(request):
     return render(request, 'welcome.html')
-
 
 def quiz_index(request):
     quiz = Quiz.objects.all()
@@ -28,24 +25,20 @@ def quiz_show(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     return render(request, 'quiz/show.html', {'quiz': quiz})
 
-
 class QuizCreate(CreateView):
     model = Quiz
     fields = '__all__'
     success_url = '/quiz'
-
 
 class QuestionsCreate(CreateView):
     model = Questions
     fields = '__all__'
     success_url = '/questions'
 
-
 class CategoryCreate(CreateView):
     model = Category
     fields = '__all__'
     success_url = '/category'
-
 
 class QuizUpdate(UpdateView):
     model = Quiz
@@ -56,7 +49,6 @@ class QuizUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/quiz/' + str(self.object.pk))
 
-
 class QuestionsUpdate(UpdateView):
     model = Questions
     fields = '__all__'
@@ -65,7 +57,6 @@ class QuestionsUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/questions/' + str(self.object.pk))
-
 
 class CategoryUpdate(UpdateView):
     model = Category
@@ -76,21 +67,17 @@ class CategoryUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/category/' + str(self.object.pk))
 
-
 class QuizDelete(DeleteView):
     model = Quiz
     success_url = '/quiz'
-
 
 class QuestionsDelete(DeleteView):
     model = Questions
     success_url = '/questions'
 
-
 class CategoryDelete(DeleteView):
     model = Category
     success_url = '/category'
-
 
 def category(request):
     categories = []
@@ -99,7 +86,6 @@ def category(request):
 #fix this to (9,33)
     for i in range(9,14):
         response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(i))
-       
         # qus_data=response.json()
         id_response = requests.get('https://opentdb.com/api_category.php')
         id_res =json.loads(id_response.text)
@@ -114,9 +100,7 @@ def category(request):
                 else:
                     categories.append({'name':res["results"][0]["category"],'id':idd})
                 break
-
     # idd=8
-
     return render(request,'index.html',{
         'categories': categories,
         'id':idd,
@@ -124,9 +108,7 @@ def category(request):
     })
     
 def levels(request,id):
-
     return render(request,'levels.html',{'id':id})
-
 
 def login_view(request):
     if request.method == 'POST':
@@ -148,11 +130,9 @@ def login_view(request):
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
 
-
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
-
 
 def signup(request):
     if request.method == 'POST':
@@ -173,17 +153,14 @@ def Profile(request, username):
     quiz = Quiz.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
 
-
 def question(request,category_num,dif):
     options=set()
-    response = requests.get('https://opentdb.com/api.php?amount=10&category={}&difficulty={}&type=multiple'.format(category_num,dif))
+    response = requests.get('https://opentdb.com/api.php?amount=5&category={}&difficulty={}&type=multiple'.format(category_num,dif))
     res =json.loads(response.text)
     #put all answers in set 
     options.add(res['results'][0]['correct_answer'])
-
     for i in res['results'][0]['incorrect_answers']:
         options.add(i)
-
     question=res["results"][0]["question"]
     question = html_decode(question)
     return render(request, 'Questions.html',{
@@ -193,7 +170,6 @@ def question(request,category_num,dif):
         })
 
 def html_decode(s):
-  
     htmlCodes = (
             ("'", '&#39;'),
             ('"', '&quot;'),
@@ -211,4 +187,3 @@ def result(request):
 
 def top_five(request):
     return render(request, 'top.html')
-

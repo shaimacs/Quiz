@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Quiz',
         'USER': 'postgres',
-        'PASSWORD': '123457'
+        'PASSWORD': 'Shaima1995'
     }
 }
 
@@ -123,10 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Audio
-MEDIA_ROOT = os.path.join(BASE_DIR, 'Audio/')
-MEDIA_URL = '/media/'
 
 # Email Config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

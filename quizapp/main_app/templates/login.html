@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Login</h1>
 <form method="POST" action=".">
     {% csrf_token %}
-    {{ form.as_p}}
-    <input type="submit" value="Submit" />
-
+    <!-- {{ form.as_p}} -->
+    <div class="main">
+        <p class="sign" align="center">Sign in</p>
+        <p><label for="id_username"></label> <input type="text"class="un " name="username" maxlength="64" required id="id_username"placeholder="Username"></p>
+          <p><label for="id_password"></label> <input type="password"class="pass" name="password" required id="id_password"placeholder="Password"></p>
+          <a class="submit" align="center">Sign in</a>
+          <br><br>
+          <p class="forgot" align="center"><a href="/password_reset/">Forgot Password?</p>
+        </div>
 </form>
-
-    <a href="{% url 'password_reset' %}" style="font-size: 12px;">Forgot Password?</a>
-
 {% endblock %}
