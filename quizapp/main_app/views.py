@@ -166,7 +166,8 @@ def question(request,category_num,dif):
     return render(request, 'Questions.html',{
         'question':question,
         'options':options,
-        'correct_answer':res['results'][0]['correct_answer']
+        'correct_answer':res['results'][0]['correct_answer'],
+        'category':res["results"][0]["category"]
         })
 
 def html_decode(s):
