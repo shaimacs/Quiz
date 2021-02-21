@@ -9,7 +9,7 @@
 
         <div id="podium-box" class="row mt-4" style="height: 400px">
           <div class="col-sm-4 step-container m-0 p-0">
-            <div class="winner_name">John🎉</div>
+            <div class="winner_name">{{user5}}🎉</div>
             <div
               id="fifth-step"
               class="bg-blue step centerBoth podium-number"
@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
-            <div class="winner_name">Jane🎉</div>
+            <div class="winner_name">{{user2}}🎉</div>
             <div
               id="second-step"
               class="bg-blue step centerBoth podium-number"
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
-            <div class="winner_name">Ad🎉</div>
+            <div class="winner_name">{{user1}}🎉</div>
             <div
               id="first-step"
               class="bg-blue step centerBoth podium-number"
@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
-            <div class="winner_name">Lol🎉</div>
+            <div class="winner_name">{{user3}}🎉</div>
             <div
               id="third-step"
               class="bg-blue step centerBoth podium-number"
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
-            <div class="winner_name">Doe🎉</div>
+            <div class="winner_name">{{user4}}🎉</div>
             <div
               id="fourth-step"
               class="bg-blue step centerBoth podium-number"
@@ -57,4 +57,11 @@
       </div>
     </div>
   </div>
+  <script>
+    console.log('{{user1}}')
+    console.log('{{user2}}')
+    console.log('{{user3}}')
+    console.log('{{user4}}')
+    console.log('{{user5}}')
+  </script>
 {% endblock %}

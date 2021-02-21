@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Quiz
 from .models import Questions
 from .models import Category
+from .models import Score
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -170,6 +171,35 @@ def question(request,category_num,dif):
         'category':res["results"][0]["category"]
         })
 
+# def question(request,category_num,dif):
+#     options=set()
+#     # options2=set()
+#     x=0
+#     questions_list=[]
+#     response = requests.get('https://opentdb.com/api.php?amount=5&category={}&difficulty={}&type=multiple'.format(category_num,dif))
+#     res =json.loads(response.text)
+#     #put all answers in set 
+#     for i in range(5):
+
+#         options.add(res['results'][i]['correct_answer'])
+#         for x in res['results'][i]['incorrect_answers']:
+#             options.add(x)
+
+#         question=res["results"][i]["question"]
+#         question =html_decode(question)
+#         questions_list.append({'q':question,'options':options})
+  
+#     # for i in options:
+#     #     options2.add(html_decode(i))
+
+#     return render(request, 'Questions.html',{
+#         'questions':questions_list,
+#         'options':options,
+#         'x':x,
+#         'correct_answer':res['results'][0]['correct_answer'],
+#         'category':res["results"][0]["category"]
+#         })
+
 def html_decode(s):
     htmlCodes = (
             ("'", '&#39;'),
@@ -177,7 +207,8 @@ def html_decode(s):
             ('>', '&gt;'),
             ('<', '&lt;'),
             ('&', '&amp;'),
-            ("'", '&#039;')
+            ("'", '&#039;'), 
+            ("-", '&shy;')
         )
     for code in htmlCodes:
         s = s.replace(code[1], code[0])
@@ -187,4 +218,16 @@ def result(request):
     return render(request, 'Result.html')
 
 def top_five(request):
-    return render(request, 'top.html')
+    users = Score.objects.order_by('score')
+
+    return render(request, 'top.html',{
+        'user1':users[0],
+        'user2':users[1],
+        'user3':users[2],
+        'user4':users[3],
+        'user5':users[4],
+        })
+
+
+
+    

@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
 <body>
   <audio id="CorrectAnswer" src="https://www.dropbox.com/s/corq44j1xt6wmk3/water.mp3?dl=1"></audio>
@@ -12,32 +12,22 @@
       </div>
       <div class="row">
         <div class="col-12 mb-2">
-          <div
-            class="d-flex align-items-center p-1"
-            style="margin-left: 9px; border-bottom: 2px solid #ddd"
-          >
-            <i
-              class="fas font-weight-bold text-danger fa-question mr-3"
-              style="font-size: 2rem"
-            ></i>
+          <div class="d-flex align-items-center p-1" style="margin-left: 9px; border-bottom: 2px solid #ddd">
+            <i class="fas font-weight-bold text-danger fa-question mr-3" style="font-size: 2rem"></i>
             <!-- <h1 id ="Timer"></h1> -->
             <h5>{{question}}</h5>
           </div>
         </div>
       </div>
-      <div class="menu_item" >
-        <div class="row" >
+      <div class="menu_item">
+        <div class="row">
           {% for option in options %}
-          <div
-            class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
-            id = "AnswersDiv">
-            <div
-              style="
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
                 width: 95%;
                 font-weight: 600;
                 border: 1px solid#ddd;
-                border-radius: 10px;"
-              class="text-center p-5">
+                border-radius: 10px;" class="text-center p-5">
               <p id='click'> {{ option }}</p>
             </div>
           </div>
@@ -56,49 +46,59 @@
         </div>
       </div>
     </div>
-  </body>
-  </div>
-  <script>
-
-var done = true;
-$('div.AnswersD').click(function (event) {
-// Don't follow the linkt
-if(done){
-  clicked()
-event.preventDefault();
-// Log the clicked element in the console
-console.log(event.target.innerText);
-ans=event.target.innerText
-if(ans === '{{ correct_answer }}'){
-  console.log('TRUE');
-  console.log(this);
-  $( this ).addClass( "correct" )
-  $(".correct div").css("background-color", "green");
-  document.querySelector("#CorrectAnswer").play()
-}
-else{
-  console.log('FALSE')
-  console.log(done)
-  $( this ).addClass( "wrong" )
-  $(".wrong div").css("background-color", "red");
-  document.querySelector("#WrongAnswer").play()
-}
-}else{
-  console.log("cant click again")
-}
-
-});
-
-const clicked = ()=>{
-  done = false
-}
+</body>
+</div>
+<script>
+    // console.log('{{questions}}')
+  var done = true;
+  $('div.AnswersD').click(function (event) {
+    // Don't follow the linkt
+    console.log($('div.AnswersD div p'))
+    if (done) {
+      clicked()
+      event.preventDefault();
+      // Log the clicked element in the console
+      console.log(event.target.innerText);
+      ans = event.target.innerText
+      if (ans === '{{ correct_answer }}') {
+        console.log('TRUE');
+        console.log(this);
+        $(this).addClass("correct")
+        $(".correct div").css("background-color", "green");
+        // event.target.style.backgroundColor = 'Green';
+        // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
+        document.querySelector("#CorrectAnswer").play()
+        location.reload();
+      }
+      else {
+        console.log('FALSE')
+        console.log(done)
+        $(this).addClass("wrong")
+        $(".wrong div").css("background-color", "red");
+        arr = $('div.AnswersD div p')
+        arrp = $('div.AnswersD div')
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].innerText === '{{ correct_answer }}') {
+            $(arrp[i]).css("background-color", "green");
+          }
+          // console.log(this,arr[i],'element',arr[i].innerText)
+        }
+        // event.target.style.backgroundColor = 'Red';
+        document.querySelector("#WrongAnswer").play()
+        location.reload();
+      }
+    } else {
+      console.log("cant click again")
+    }
+  });
+  const clicked = () => {
+    done = false
+  }
 // $(function () {
-// 	var liftoffTime = new Date();
+//  var liftoffTime = new Date();
 //   liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, 26);
 //   $('#Timer').countdown({until: liftoffTime, format: 'MS'});
-// 	$('#year').text(austDay.getFullYear());
+//  $('#year').text(austDay.getFullYear());
 // });
-
-  </script>
-
+</script>
 {% endblock %}
