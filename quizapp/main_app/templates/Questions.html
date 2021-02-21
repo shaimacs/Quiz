@@ -50,6 +50,7 @@
 </body>
 </div>
 <script>
+    // console.log('{{questions}}')
 
   var done = true;
   $('div.AnswersD').click(function (event) {
@@ -71,6 +72,8 @@
         // event.target.style.backgroundColor = 'Green';
         // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
         document.querySelector("#CorrectAnswer").play()
+        location.reload();
+
       }
       else {
         console.log('FALSE')
@@ -87,6 +90,8 @@
         }
         // event.target.style.backgroundColor = 'Red';
         document.querySelector("#WrongAnswer").play()
+        location.reload();
+
       }
     } else {
       console.log("cant click again")
