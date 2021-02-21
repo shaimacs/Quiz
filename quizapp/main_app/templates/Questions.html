@@ -74,8 +74,6 @@ if(ans === '{{ correct_answer }}'){
   console.log(this);
   $( this ).addClass( "correct" )
   $(".correct div").css("background-color", "green");
-  // event.target.style.backgroundColor = 'Green';
-  // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
   document.querySelector("#CorrectAnswer").play()
 }
 else{
@@ -83,7 +81,6 @@ else{
   console.log(done)
   $( this ).addClass( "wrong" )
   $(".wrong div").css("background-color", "red");
-  // event.target.style.backgroundColor = 'Red';
   document.querySelector("#WrongAnswer").play()
 }
 }else{
