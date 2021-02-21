@@ -1,4 +1,5 @@
-from django.shortcuts import render
+# from quizapp.main_app.templates.main_app.forms import ScoreForm
+from django.shortcuts import redirect, render
 from .models import Quiz
 from .models import Questions
 from .models import Category
@@ -214,11 +215,16 @@ def html_decode(s):
         s = s.replace(code[1], code[0])
     return s
 
-def result(request):
-    return render(request, 'Result.html')
+def result(self,request):
+    # val_no = request.POST.get('no',request.POST)
+    val_no = self.request.POST['no']
+
+    print('HHHHHHHHHH')
+    # val_no = request.POST.data['no']
+    return render(request, 'Result.html',{'no':val_no})
 
 def top_five(request):
-    users = Score.objects.order_by('score')
+    users = Score.objects.order_by('-score')
 
     return render(request, 'top.html',{
         'user1':users[0],
