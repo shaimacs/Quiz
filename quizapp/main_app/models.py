@@ -12,11 +12,13 @@ class Quiz(models.Model):
 
 
 class Questions(models.Model):
-    question = models.CharField(max_length=400)
+    category = models.CharField(max_length=150)
     type = models.CharField(max_length=150)
-    correctAnswer = models.CharField(max_length=150)
-    Level = models.CharField(max_length=150)
-    hint = models.CharField(max_length=150)
+    difficulty = models.CharField(max_length=150)
+    question = models.CharField(max_length=400)
+    correct_answer = models.CharField(max_length=150)
+    incorrect_answers = models.CharField(max_length=700)
+    # hint = models.CharField(max_length=150)
     # time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
 
 class Category(models.Model):
