@@ -184,12 +184,16 @@ margin-bt{
   }
   .top_wrapper {
     background-color: #6c08ca;
-     
+  }
+  .bounce{
+    background-color: green;
+    color : red;
   }
   .trophy {
     color: rgb(250, 171, 74);
     text-shadow: 2px 2px 2px black;
   }
+
 
   .top5_text {
     font-size: 3rem;

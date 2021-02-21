@@ -29,7 +29,7 @@
         <div class="row" >
           {% for option in options %}
           <div
-            class="col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
+            class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center"
             id = "AnswersDiv">
             <div
               style="
@@ -59,24 +59,42 @@
   </body>
   </div>
   <script>
-$('p').click(function (event) {
+
+var done = true;
+$('div.AnswersD').click(function (event) {
 // Don't follow the linkt
+if(done){
+  clicked()
 event.preventDefault();
 // Log the clicked element in the console
 console.log(event.target.innerText);
-ans=event.target.innerTex
+ans=event.target.innerText
 if(ans === '{{ correct_answer }}'){
   console.log('TRUE');
-  event.target.style.backgroundColor = 'Green';
+  console.log(this);
+  $( this ).addClass( "correct" )
+  $(".correct div").css("background-color", "green");
+  // event.target.style.backgroundColor = 'Green';
   // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
   document.querySelector("#CorrectAnswer").play()
 }
 else{
   console.log('FALSE')
-  event.target.style.backgroundColor = 'Red';
+  console.log(done)
+  $( this ).addClass( "wrong" )
+  $(".wrong div").css("background-color", "red");
+  // event.target.style.backgroundColor = 'Red';
   document.querySelector("#WrongAnswer").play()
 }
+}else{
+  console.log("cant click again")
+}
+
 });
+
+const clicked = ()=>{
+  done = false
+}
 // $(function () {
 // 	var liftoffTime = new Date();
 //   liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, 26);

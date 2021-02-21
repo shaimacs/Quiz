@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <form method="POST" action=".">
-    {% csrf_token %}
-    <!-- {{ form.as_p}} -->
-    <div class="main">
-        <p class="sign" align="center">Sign in</p>
-        <p><label for="id_username"></label> <input type="text"class="un " name="username" maxlength="64" required id="id_username"placeholder="Username"></p>
-          <p><label for="id_password"></label> <input type="password"class="pass" name="password" required id="id_password"placeholder="Password"></p>
-          <a class="submit" align="center">Sign in</a>
-          <br><br>
-          <p class="forgot" align="center"><a href="/password_reset/">Forgot Password?</p>
-        </div>
+  {% csrf_token %}
+  <!-- {{ form.as_p}} -->
+  <div class="main">
+    <p class="sign" align="center">Sign in</p>
+    <p><label for="id_username"></label> <input type="text" class="un " name="username" maxlength="64" required
+        id="id_username" placeholder="Username"></p>
+    <p><label for="id_password"></label> <input type="password" class="pass" name="password" required id="id_password"
+        placeholder="Password"></p>
+    <button type="Submit" align="center" class="submit">Sign in</button>
+    <br><br>
+    <p class="forgot" align="center"><a href="/password_reset/">Forgot Password?</p>
+  </div>
 </form>
 {% endblock %}
