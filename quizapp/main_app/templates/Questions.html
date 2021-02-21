@@ -33,19 +33,28 @@
           </div>
           {% endfor %}
           <p id='click'> {{ correct_answer }}</p>
-          <button type="submit">Submit</button>
+          <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a>
+          
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div style="margin-left: 10px">
-            <button class="btn btn-outline-warning">
+            <button class="btn btn-outline-warning" id="help">
               Need Help<i class="fas fa-question ml-2"></i>
             </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- <form action="." method="POST">
+      {% csrf_token %}
+   
+    <input type="hidden" name="score"> 5
+    <input type="submit" name="submit">
+  </form> -->
+
 </body>
 </div>
 <script>
@@ -68,6 +77,7 @@
         // event.target.style.backgroundColor = 'Green';
         // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
         document.querySelector("#CorrectAnswer").play()
+
         location.reload();
       }
       else {
@@ -94,6 +104,58 @@
   const clicked = () => {
     done = false
   }
+
+  $('#help').click(function (event) {
+    event.preventDefault();
+    console.log('help','{{options}}')
+
+    let str = ''
+    $.ajax({
+        type:'POST',
+        url: '{% url "result" %}',
+        data: {
+          'no': 10
+        },
+        dataType: 'json',
+        success: function (data) {
+        
+            console.log("A user with this username already exists.");
+          
+        }
+    // for (let i = 0; i < '{{options}}'.length; i++) {
+
+    // }
+  })
+})
+
+  // function () {
+  //       $.ajax({
+  //               url : '/result/', // the endpoint
+  //               type : 'GET', // http method
+  //               data : { 'res' : 10,
+                         
+  //                }, // data sent with the post request
+
+  //               // handle a successful response
+  //               success : console.log('success')
+
+  //       });
+  //   }
+
+//  function showPosition(){
+//   $.ajax({
+//         type: 'POST',
+//         url: "/result",
+//         data: {
+//             "no":10
+//         },
+//         dataType: "json"
+//     }).done(function (data) {
+//         alert(data);
+//     });
+//   }
+
+
 // $(function () {
 //  var liftoffTime = new Date();
 //   liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, 26);

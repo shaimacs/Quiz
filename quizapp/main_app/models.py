@@ -24,7 +24,7 @@ class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Score(models.Model):
-    score = models.CharField(max_length=100)
+    score = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
