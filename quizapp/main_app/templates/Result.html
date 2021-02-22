@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
+{% csrf_token %}
+
 <body>
     <div>
       <div class="container">
         <div class="header mt-5 border text-center mb-5">
+          <h1>{{no}}</h1>
+          <h1>{{id}}</h1>
           <h3 class="p-3 text-center">Congrats🎉! You Finish your Quiz.</h3>
         </div>
         <div class="row mb-3">
           <div
             class="col-12 mb-3 col-sm-4 d-flex justify-content-center align-items-center"
           >
+
             <div
               class="text-center p-3"
               style="
@@ -67,7 +72,7 @@
       </div>
     </div>
     <script>
-      console.log('{{res}}')
+      console.log('{{no}}')
     </script>
   </body>
 {% endblock %}

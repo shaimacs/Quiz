@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 import requests
 import json
 import re
@@ -215,13 +216,22 @@ def html_decode(s):
         s = s.replace(code[1], code[0])
     return s
 
-def result(self,request):
-    # val_no = request.POST.get('no',request.POST)
-    val_no = self.request.POST['no']
+@csrf_protect
+def result(request):
 
-    print('HHHHHHHHHH')
-    # val_no = request.POST.data['no']
-    return render(request, 'Result.html',{'no':val_no})
+    
+    no=request.GET.get('no')
+    # res =json.loads(no.text)
+    current_user = request.user
+    # Score.objects.filter(user_id=1).update(score=no)
+    e = Score.objects.get(user_id=1)
+    no = e.score
+    
+    print('225',request.method)
+    print('226',request.GET.get('no')) 
+    print('227',type(no)) 
+    
+    return render(request, 'Result.html',{'no':no, 'id':current_user.id})
 
 def top_five(request):
     users = Score.objects.order_by('-score')

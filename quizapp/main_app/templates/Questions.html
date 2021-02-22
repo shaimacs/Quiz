@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% csrf_token %}
+
 <body>
   <audio id="CorrectAnswer" src="https://www.dropbox.com/s/corq44j1xt6wmk3/water.mp3?dl=1"></audio>
   <audio id="WrongAnswer" src="https://www.dropbox.com/s/xxx4y9wbiabslrq/Tie.mp3?dl=1"></audio>
@@ -59,6 +61,7 @@
 </div>
 <script>
     // console.log('{{questions}}')
+   
   var done = true;
   $('div.AnswersD').click(function (event) {
     // Don't follow the linkt
@@ -74,6 +77,7 @@
         console.log(this);
         $(this).addClass("correct")
         $(".correct div").css("background-color", "green");
+        score++
         // event.target.style.backgroundColor = 'Green';
         // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
         document.querySelector("#CorrectAnswer").play()
@@ -109,51 +113,33 @@
     event.preventDefault();
     console.log('help','{{options}}')
 
-    let str = ''
-    $.ajax({
-        type:'POST',
-        url: '{% url "result" %}',
-        data: {
-          'no': 10
-        },
-        dataType: 'json',
-        success: function (data) {
-        
-            console.log("A user with this username already exists.");
-          
-        }
-    // for (let i = 0; i < '{{options}}'.length; i++) {
+    for(var i=0;i<1;i++){
 
-    // }
-  })
+    "{% for i in options %}"
+    if('{{i}}' != '{{correct_answer}}'){
+    console.log('wrong answer => ','{{i}}')
+    break
+    }
+    "{% endfor %}"
+  }//end for js
 })
 
-  // function () {
-  //       $.ajax({
-  //               url : '/result/', // the endpoint
-  //               type : 'GET', // http method
-  //               data : { 'res' : 10,
-                         
-  //                }, // data sent with the post request
 
-  //               // handle a successful response
-  //               success : console.log('success')
+ function showPosition(){
+  var data = {no: 700};
+    var token = '{{csrf_token}}';
 
-  //       });
-  //   }
 
-//  function showPosition(){
-//   $.ajax({
-//         type: 'POST',
-//         url: "/result",
-//         data: {
-//             "no":10
-//         },
-//         dataType: "json"
-//     }).done(function (data) {
-//         alert(data);
-//     });
-//   }
+$.ajax({
+    // headers: { "X-CSRFToken": token },
+    type: 'GET',
+    url: '/result/',
+    contentType: 'application/json; charset=utf-8',
+    data: data,
+    dataType: 'text',
+    
+});
+  }
 
 
 // $(function () {
