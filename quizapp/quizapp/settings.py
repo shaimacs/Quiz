@@ -27,7 +27,8 @@ SECRET_KEY = 'l5-tjyu=wii@16g*o)!u0u75@r6#2_=a7dxm2taz9##fn1b*9c'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 

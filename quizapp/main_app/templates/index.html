@@ -14,7 +14,7 @@
         </div>
         
         <div class="menu_item">
-          <div class="row">
+          <div class="row" id="cat_row">
             
             {% for category in categories%}
             <a href="{% url 'levels' category.id %}">
@@ -24,14 +24,29 @@
             
               <div
                 style="
-                  width: 95%;
+                   width: 200px;
+                  height: 150px;
                   font-weight: 600;
                   border: 1px solid#ddd;
                   border-radius: 10px;
+                  padding: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;              
                 "
-                class="text-center p-5 bg-info text-white"
+                 {% if category.name == 'General Knowledge' %}
+                 class="text-center bg-info text-white"
+                 {% elif category.name == 'Entertainment: Books' %}
+                 class="text-center bg-success text-white"
+                 {% elif category.name == 'Entertainment: Film' %}
+                 class="text-center bg-danger text-white"
+                 {% elif category.name == 'Entertainment: Music' %}
+                 class="text-center bg-warning text-white"
+                 {% elif category.name == 'Entertainment: Musicals & Theatres' %}
+                 class="text-center bg-dark text-white"               
+                 {% endif %}
               >
-                <i class="fas fa-city mr-2"></i> {{category.name}}
+                {{category.name}}
               </div>
             </a>
             </div>
