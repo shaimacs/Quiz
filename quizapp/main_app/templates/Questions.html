@@ -17,13 +17,50 @@
           <div class="d-flex align-items-center p-1" style="margin-left: 9px; border-bottom: 2px solid #ddd">
             <i class="fas font-weight-bold text-danger fa-question mr-3" style="font-size: 2rem"></i>
             <!-- <h1 id ="Timer"></h1> -->
-            <h5>{{question}}</h5>
+            <!-- <h5 id="question">{{question}}</h5> -->
+            <h5 id="question"> Loading... </h5>
           </div>
         </div>
       </div>
       <div class="menu_item">
         <div class="row">
-          {% for option in options %}
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans1" id='click'> Loading... </p>
+            </div>
+          </div>
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans2" id='click'> Loading... </p>
+            </div>
+          </div>
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans3" id='click'> Loading... </p>
+            </div>
+          </div>
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans4" id='click'> Loading... </p>
+            </div>
+          </div>
+          <!-- {% for option in options %}
           <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
             <div style="
                 width: 95%;
@@ -33,10 +70,12 @@
               <p id='click'> {{ option }}</p>
             </div>
           </div>
-          {% endfor %}
-          <p id='click'> {{ correct_answer }}</p>
+          {% endfor %} -->
+          <!-- <p id='click'> {{ correct_answer }}</p> -->
+          <p id='click'> </p>
           <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a>
-          
+          <a><button id="nextbtn" type="next" onclick=next()> next</button></a>
+
         </div>
       </div>
       <div class="row">
@@ -60,19 +99,88 @@
 </body>
 </div>
 <script>
-    // console.log('{{questions}}')
-   
+
+  const ran = () => {
+    return Math.floor(1 + Math.random() * 4)
+  }
+  var rann = []
+  var all
+  window.onload = function () {
+    $.ajax({
+      // headers: { "X-CSRFToken": token },
+      type: 'GET',
+      url: 'https://opentdb.com/api.php?amount=5&category={{ category_num }}&difficulty={{ dif }}&type=multiple',
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) {
+        all = result.results
+        $('#question')[0].innerHTML = all[0].question
+        $('#click')[0].innerHTML = all[0].correct_answer
+        var temp = ran()
+        rann.push(temp)
+        $('#ans' + temp)[0].innerHTML = all[0].correct_answer
+        for (let i = 0; i < 3; i++) {
+          temp1 = ran()
+          while (rann.includes(temp1) && rann.length < 4) {
+            temp1 = ran()
+          }
+          rann.push(temp1)
+          $('#ans' + temp1)[0].innerHTML = all[0].incorrect_answers[i]
+        }
+        console.log("score: ",score)
+      }
+    })
+    // for (let i = 1; i < 5; i++) {
+    //   document.getElementById('ans'+i).innerHTML = ;
+    // }
+  };
+  var page = 1
+  const next = () => {
+    var temp2 = ran()
+    rann=[]
+    $(".correct div").css("background-color", "");
+    $(".wrong div").css("background-color", "");
+    $(".wrong").removeClass("wrong")
+    $(".correct").removeClass("correct")
+    clicked()
+    if (page <= 4) {
+      $('#question')[0].innerHTML = all[page].question
+      $('#click')[0].innerHTML = all[page].correct_answer
+      var tempp = ran()
+      rann.push(tempp)
+      $('#ans' + tempp)[0].innerHTML = all[page].correct_answer
+      console.log("correct",all[page].correct_answer)
+      for (let i = 0; i < 3; i++) {
+        temp2 = ran()
+        while (rann.includes(temp2) && rann.length < 4) {
+          temp2 = ran()
+        }
+        rann.push(temp2)
+        
+        $('#ans' + temp2)[0].innerHTML = all[page].incorrect_answers[i]
+      }
+
+    }
+    if (page >= 4) {
+      $("#nextbtn")[0].innerHTML = "result"
+    }
+    if (page == 5)
+      window.location.replace("/result/");
+    page++
+    console.log("score: ",score)
+  }
+  // console.log('{{questions}}')
   var done = true;
+  var score = 0;
   $('div.AnswersD').click(function (event) {
     // Don't follow the linkt
-    console.log($('div.AnswersD div p'))
     if (done) {
       clicked()
       event.preventDefault();
       // Log the clicked element in the console
       console.log(event.target.innerText);
       ans = event.target.innerText
-      if (ans === '{{ correct_answer }}') {
+      console.log(ans,page,"LLLlllllll")
+      if (ans === all[page-1].correct_answer) {
         console.log('TRUE');
         console.log(this);
         $(this).addClass("correct")
@@ -82,63 +190,85 @@
         // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
         document.querySelector("#CorrectAnswer").play()
 
-        location.reload();
+        // location.reload();
       }
       else {
         console.log('FALSE')
         console.log(done)
         $(this).addClass("wrong")
         $(".wrong div").css("background-color", "red");
-        arr = $('div.AnswersD div p')
-        arrp = $('div.AnswersD div')
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i].innerText === '{{ correct_answer }}') {
-            $(arrp[i]).css("background-color", "green");
-          }
-          // console.log(this,arr[i],'element',arr[i].innerText)
-        }
         // event.target.style.backgroundColor = 'Red';
         document.querySelector("#WrongAnswer").play()
-        location.reload();
+        // location.reload();
+        
       }
     } else {
       console.log("cant click again")
     }
+    console.log("score: ",score)
   });
   const clicked = () => {
-    done = false
+    done = !done
   }
 
   $('#help').click(function (event) {
     event.preventDefault();
-    console.log('help','{{options}}')
+    console.log('help', '{{options}}')
 
-    for(var i=0;i<1;i++){
+    for (var i = 0; i < 1; i++) {
 
-    "{% for i in options %}"
-    if('{{i}}' != '{{correct_answer}}'){
-    console.log('wrong answer => ','{{i}}')
-    break
-    }
-    "{% endfor %}"
-  }//end for js
-})
+      "{% for i in options %}"
+      if ('{{i}}' != '{{correct_answer}}') {
+        console.log('wrong answer => ', '{{i}}')
+        break
+      }
+      "{% endfor %}"
+    }//end for js
+    $.ajax({
+      // headers: { "X-CSRFToken": token },
+      type: 'GET',
+      url: 'https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple',
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result.results) }
+    });
 
+  })
 
- function showPosition(){
-  var data = {no: 700};
+  for (let i = 1; i < 6; i++) {
+    console.log("qqqqqqqqqqqqqqqqqqqqqqq", typeof ('{{qq}}'))
+
+  }
+
+  console.log('{{correct_answer}}')
+  function showPosition() {
+    var data = { no: 700 };
     var token = '{{csrf_token}}';
+    $.ajax({
+      // headers: { "X-CSRFToken": token },
+      type: 'GET',
+      url: '/result/',
+      data: data,
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result) }
+    });
+
+    // $.ajax({
+    //   // headers: { "X-CSRFToken": token },
+    //   type: 'GET',
+    //   url: '/result/',
+    //   contentType: 'application/json; charset=utf-8',
+    //   data: data,
+    //   dataType: 'text',
+
+    // });
+  }
 
 
-$.ajax({
-    // headers: { "X-CSRFToken": token },
-    type: 'GET',
-    url: '/result/',
-    contentType: 'application/json; charset=utf-8',
-    data: data,
-    dataType: 'text',
-    
-});
+  function showNext() {
+    let hh = parseInt(window.location.pathname.slice(17, 19))
+    let hr = 'http://127.0.0.1:8000/levels/question/' + (hh + 1) + '/hard'
+    console.log("next", typeof (hh), hr, hr + 1)
+    window.location.replace(hr);
   }
 
 
