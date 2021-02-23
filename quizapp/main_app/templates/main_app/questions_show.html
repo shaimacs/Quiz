@@ -2,9 +2,20 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-    <table>
-        {% for question in questions %}
-        <h3>{{question}}</h3>
+    <button type="button" class="btn btn-primary"><a href="{% url 'questions_create' %}" style ="color: white; text-decoration: none"
+        >Add new Question</a></button>
+    <table class="table" >
+        <thead>
+            <tr><h3>Questions :</h3></tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+        </tbody>
+        <tr class="active">
+        <td><h4>{{question}}</h4></td>
+        <td><button type="button" class="btn btn-primary"><a href="{% url 'questions_update' question.id %}" style ="color: white; text-decoration: none" >Update Details</a></button></td>
+        <td><button type="button" class="btn btn-primary"><a href="{% url 'questions_delete' question.id %}" style ="color: white; text-decoration: none">DELETE This Question</a></button></td>
+        </tr>
         {% endfor %}
         {{ form.as_table }}
     </table>

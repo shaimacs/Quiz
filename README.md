@@ -43,21 +43,53 @@ to start your server.<br>
 ### WireFrames
 > WireFrame.
 
-| Category page      | Levels page      | Questions Page      | col 2      | WireFreame1      | col 2      |
-|------------|-------------|------------|-------------|------------|-------------|
-|<img src = "Images/categeory.jpeg" width="100%"> | <img src = "Images/levels.jpeg" width="100%">| <img src = "Images/questions.jpeg" width="100%">
+| Category page      | Levels page      | Questions Page      | Result Page      | Top Five page      
+|------------|-------------|------------|-------------|------------
+|<img src = "Images/categeory.jpeg" > | <img src = "Images/levels.jpeg" width="100%">| <img src = "Images/questions.jpeg" width="100%"> | <img src = "Images/result.jpeg" width="100%"> | <img src = "Images/Top Five.jpeg" width="100%">
 
 
 
 ### Folder Structure 
-    ├── ...
-    ├── docs                    # Documentation files (alternatively `doc`)
-    │   ├── TOC.md              # Table of contents
-    │   ├── faq.md              # Frequently asked questions
-    │   ├── misc.md             # Miscellaneous information
-    │   ├── usage.md            # Getting started guide
-    │   └── ...                 # etc.
-    └── ...
+├── Quiz
+│   └── main_app
+│       ├── components
+│       ├── __pycache__
+│       ├── migrations
+│       ├── static
+│       │   └── style.css
+|       ├── templates
+|       |   ├── main_app  
+│       │       ├── forms.py
+│       │       ├── questions_confirm_delete.html
+│       │       ├── questions_form.html
+│       │       ├── questions_show.html
+│       │       ├── questions_update.html
+│       │       ├── quiz_confirm_delete.html
+│       │       ├── quiz_form.html           
+|       │   ├── quiz    
+│       │       ├── index.html
+│       │       ├── show.html          
+|       │   ├── base.html             
+|       │   ├── category_top_five.html           
+|       │   |── index.html
+|       |   ├── levels.html            
+|       │   ├── login.html             
+|       │   ├── password_reset_complete.html             
+|       │   ├── password_reset_confirm.html      
+|       │   |── password_reset_email.html
+|       |   ├── password_reset_form.html           
+|       │   ├── profile.html           
+|       │   ├── Questions.html             
+|       │   ├── Result.html      
+|       │   ├── signup.html  
+|       │   ├── top.html   
+|       │   └── welcome.html
+│       ├── models.py
+│       ├── urls.py
+│       └── views.py
+├── env
+├── .gitignore
+└── README.md
 
 # Use
 Either download the project or [Use it online]()
@@ -104,7 +136,7 @@ Many many thanks to: JRJS\
 [Mohammad Jouza](https://git.generalassemb.ly/MohammadJouza)\
 [Raymond](https://git.generalassemb.ly/raymond)\
 [Jaber alsalamah](https://git.generalassemb.ly/jaberalsalamah)\
-[Sameh kinawy](https://git.generalassemb.ly/samehkinawy)
+[Sameh kinawy](https://git.generalassemb.ly/samehkinawy)\
 [Sara Kuddah]
 
 

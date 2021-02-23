@@ -161,3 +161,11 @@ a {
     color: white;
     font-size: 14px;
   }
+  .next {
+    background-color: #f1f1f1;
+    color: black;
+  }
+  
+  .round {
+    border-radius: 100%;
+  }

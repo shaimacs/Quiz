@@ -26,7 +26,7 @@ class Questions(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=150)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Score(models.Model):
     score = models.CharField(max_length=150)

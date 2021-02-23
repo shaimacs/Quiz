@@ -59,7 +59,7 @@ class QuestionsUpdate(UpdateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
-        return HttpResponseRedirect('/questions/' + str(self.object.pk))
+        return HttpResponseRedirect('/questions/')
 
 class CategoryUpdate(UpdateView):
     model = Category
@@ -95,6 +95,8 @@ def category(request):
     id_res =json.loads(id_response.text)
     for i in id_res['trivia_categories']:
         cate.append({'name':i["name"],'id':i["id"]})
+    # for i in cate:
+    #     Category.objects.create(name=i['name'])
            
     return render(request,'index.html',{
         'categories' : cate
