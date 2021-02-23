@@ -13,6 +13,8 @@ urlpatterns = [
     path('questions/create/', views.QuestionsCreate.as_view(), name='questions_create'),
     path('questions/<int:pk>/update/', views.QuestionsUpdate.as_view(), name='questions_update'),
     path('questions/<int:pk>/delete/', views.QuestionsDelete.as_view(), name='questions_delete'),
+    path('questions/', views.questionsShow, name='questions_show'),
+
     path('category/create/', views.CategoryCreate.as_view(), name='category_create'),
     path('category/<int:pk>/update/', views.CategoryUpdate.as_view(), name='category_update'),
     path('category/<int:pk>/delete/', views.CategoryDelete.as_view(), name='category_delete'),
@@ -23,8 +25,6 @@ urlpatterns = [
     path('category/', views.category, name='category'),
     path('result/', views.result, name='result'),
     path('levels/', views.levels, name='levels'),
-    # path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    # path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(),name='password_reset_done'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name="password_reset_form.html"),{'post_reset_redirect': 'reset_password_done'}, name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name="password_reset_done.html"),name='password_reset_done'),
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html"),name='password_reset_confirm'),

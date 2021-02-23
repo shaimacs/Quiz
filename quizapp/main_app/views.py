@@ -70,6 +70,10 @@ class CategoryUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/category/' + str(self.object.pk))
 
+def questionsShow(request):
+    questions = Questions.objects.all()
+    return render(request, 'main_app/questions_show.html', {'questions': questions})
+
 class QuizDelete(DeleteView):
     model = Quiz
     success_url = '/quiz'
@@ -161,34 +165,16 @@ def question(request,category_num,dif):
     response = requests.get('https://opentdb.com/api.php?amount=5&category={}&difficulty={}&type=multiple'.format(category_num,dif))
     res =json.loads(response.text)
     #put all answers in set 
-    qq={
-    "q1":res['results'][0],
-    "q2":res['results'][1],
-    "q3":res['results'][2],
-    "q4":res['results'][3],
-    "q5":res['results'][4]
-    }
-    options.add(html_decode(res['results'][0]['correct_answer']))
+    options.add(res['results'][0]['correct_answer'])
     for i in res['results'][0]['incorrect_answers']:
-        print(i,'555555555555555555555555')
-        options.add(html_decode(i))
+        options.add(i)
     question=res["results"][0]["question"]
     question = html_decode(question)
-    print(options,'888888888888888888888888')
-    # newOP={"zzzz"} 
-    # for i in options:
-    #     options.add(html_decode(i))
-    # print('qqqqqqq',question)
-    # print('oooooooooooo',options)
-    # print('op',newOP)
     return render(request, 'Questions.html',{
         'question':question,
         'options':options,
         'correct_answer':res['results'][0]['correct_answer'],
-        'category':res["results"][0]["category"],
-        'qq':qq,
-        'category_num':category_num,
-        'dif':dif
+        'category':res["results"][0]["category"]
         })
 
 # def question(request,category_num,dif):
@@ -208,7 +194,7 @@ def question(request,category_num,dif):
 #         question=res["results"][i]["question"]
 #         question =html_decode(question)
 #         questions_list.append({'q':question,'options':options})
-
+  
 #     # for i in options:
 #     #     options2.add(html_decode(i))
 
@@ -228,9 +214,7 @@ def html_decode(s):
             ('<', '&lt;'),
             ('&', '&amp;'),
             ("'", '&#039;'), 
-            ("-", '&shy;'),
-            ("ñ", '&ntilde;'),
-            ("µ", '&micro;')
+            ("-", '&shy;')
         )
     for code in htmlCodes:
         s = s.replace(code[1], code[0])
