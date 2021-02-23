@@ -90,28 +90,20 @@ def category(request):
     categories = []
     cat=''
     idd=[]
+    cate=[]
 #fix this to (9,33)
-    for i in range(9,14):
-        response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(i))
+    # for i in range(9,33):
+        # response = requests.get('https://opentdb.com/api.php?amount=5&category={}&type=multiple'.format(i))
         # qus_data=response.json()
-        id_response = requests.get('https://opentdb.com/api_category.php')
-        id_res =json.loads(id_response.text)
-        res =json.loads(response.text)
+    id_response = requests.get('https://opentdb.com/api_category.php')
+    id_res =json.loads(id_response.text)
+        # res =json.loads(response.text)
 
-        for i in id_res['trivia_categories']:
-            if(res["results"][0]["category"] == i['name']):
-                idd=i['id']
-                cat=i['name']
-                if (len(res["results"]) < 1 ):
-                    pass
-                else:
-                    categories.append({'name':res["results"][0]["category"],'id':idd})
-                break
-    # idd=8
+    for i in id_res['trivia_categories']:
+        cate.append({'name':i["name"],'id':i["id"]})
+           
     return render(request,'index.html',{
-        'categories': categories,
-        'id':idd,
-        'name':cat
+        'categories' : cate
     })
     
 def levels(request,id):
@@ -295,23 +287,12 @@ def category_top_five(request):
     categories = []
     cat=''
     idd=[]
-#fix this to (9,33)
-    for i in range(9,14):
-        response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(i))
-        # qus_data=response.json()
+    for i in range(9,33):
         id_response = requests.get('https://opentdb.com/api_category.php')
         id_res =json.loads(id_response.text)
-        res =json.loads(response.text)
-
         for i in id_res['trivia_categories']:
-            if(res["results"][0]["category"] == i['name']):
-                idd=i['id']
-                cat=i['name']
-                if (len(res["results"]) < 1 ):
-                    pass
-                else:
-                    categories.append({'name':res["results"][0]["category"]})
-                break
+            cat.append({'name':i["name"],'id':i["id"]})
+                
     return render(request,'category_top_five.html',{
         'categories': categories
     })
