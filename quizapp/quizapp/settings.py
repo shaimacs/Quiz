@@ -83,6 +83,7 @@ DATABASES = {
         'NAME': 'Quiz',
         'USER': 'postgres',
         'PASSWORD': 'Shaima1995'
+
     }
 }
 

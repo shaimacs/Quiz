@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://kit.fontawesome.com/a215bce284.js"></script>
 
@@ -20,21 +21,20 @@
    
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">Home Page</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/category/">Categories <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/category_for_top_five/">Top Five</a>
-      </li>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" style="font-size: 1rem" href="/">Home Page</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/category/">Categories <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category_for_top_five/">Top Five</a>
+        </li>
       {% if user.is_authenticated %}
       <li class="nav-item">
         <a class="btn" style="color: white; font-size: 1rem; font-weight: 600;" href="{% url 'profile' user.username %}">Hello, {{ user.username }}!</a>
@@ -43,23 +43,31 @@
         <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
       </li>                         
       {% else %}
-      <div class="topnav-right">
       <span><a href="{% url 'login' %}" >Login</a></span>
       <span> | </span>
-      <span><a href="{% url 'signup' %}">SignUp</a></span></div>
+      <span><a href="{% url 'signup' %}">SignUp</a></span>
       {% endif %}  
     </ul>
+
     
-  </div>
-</nav>
+      
+      
+    </div>
+  </nav>
 
     {% block content %}
     {% endblock %}
-    <div class="mt-3">
-        <footer class="bg-dark p-3 text-center text-white">
+    <div id="footer" class="mt-3">
+
+        <footer style="position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        color: white;
+        text-align: center;"  class="bg-dark p-3 text-center text-white">
             Copyright &copy; 2021. All Rights Reserved, QuizApp. 
         </footer>
     </div>
+
 </body>
- 
 </html>

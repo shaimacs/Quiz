@@ -24,7 +24,7 @@
             
               <div
                 style="
-                   width: 200px;
+                  width: 200px;
                   height: 150px;
                   font-weight: 600;
                   border: 1px solid#ddd;
@@ -34,17 +34,55 @@
                   align-items: center;
                   justify-content: center;              
                 "
-                 {% if category.name == 'General Knowledge' %}
-                 class="text-center bg-info text-white"
-                 {% elif category.name == 'Entertainment: Books' %}
-                 class="text-center bg-success text-white"
-                 {% elif category.name == 'Entertainment: Film' %}
-                 class="text-center bg-danger text-white"
-                 {% elif category.name == 'Entertainment: Music' %}
-                 class="text-center bg-warning text-white"
-                 {% elif category.name == 'Entertainment: Musicals & Theatres' %}
-                 class="text-center bg-dark text-white"               
-                 {% endif %}
+                {% if category.name == 'General Knowledge' %}
+                class="text-center bg-info text-white"
+                {% elif category.name == 'Entertainment: Books' %}
+                class="text-center bg-success text-white"
+                {% elif category.name == 'Entertainment: Film' %}
+                class="text-center bg-danger text-white"
+                {% elif category.name == 'Entertainment: Music' %}
+                class="text-center bg-warning text-white"
+                {% elif category.name == 'Entertainment: Musicals & Theatres' %}
+                class="text-center bg-dark text-white"     
+                {% elif category.name == 'Entertainment: Television' %}
+                class="text-center bg-info text-white"
+                {% elif category.name == 'Entertainment: Video Games' %}
+                class="text-center bg-success text-white"
+                {% elif category.name == 'Entertainment: Board Games' %}
+                class="text-center bg-danger text-white"
+                {% elif category.name == 'Science & Nature' %}
+                class="text-center bg-warning text-white"
+                {% elif category.name == 'Science: Computers' %}
+                class="text-center bg-dark text-white" 
+                {% elif category.name == 'Science: Mathematics' %}
+                class="text-center bg-info text-white"
+                {% elif category.name == 'Mythology' %}
+                class="text-center bg-success text-white"
+                {% elif category.name == 'Sports' %}
+                class="text-center bg-danger text-white"
+                {% elif category.name == 'Geography' %}
+                class="text-center bg-warning text-white"
+                {% elif category.name == 'History' %}
+                class="text-center bg-dark text-white" 
+                {% elif category.name == 'Politics' %}
+                class="text-center bg-info text-white"
+                {% elif category.name == 'Art' %}
+                class="text-center bg-success text-white"
+                {% elif category.name == 'Celebrities' %}
+                class="text-center bg-danger text-white"
+                {% elif category.name == 'Animals' %}
+                class="text-center bg-warning text-white"
+                {% elif category.name == 'Vehicles' %}
+                class="text-center bg-dark text-white" 
+                {% elif category.name == 'Entertainment: Comics' %}
+                class="text-center bg-info text-white"
+                {% elif category.name == 'Science: Gadgets' %}
+                class="text-center bg-success text-white"
+                {% elif category.name == 'Entertainment: Japanese Anime & Manga' %}
+                class="text-center bg-danger text-white"
+                {% elif category.name == 'Entertainment: Cartoon & Animations' %}
+                class="text-center bg-warning text-white"
+                {% endif %}
               >
                 {{category.name}}
               </div>
@@ -133,6 +171,5 @@
       </div>
     </div>
   </body>
- 
 
 {% endblock %}
