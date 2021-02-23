@@ -59,25 +59,11 @@
               <p id="ans4" id='click'> Loading... </p>
             </div>
           </div>
-          <!-- {% for option in options %}
-          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
-            <div style="
-                width: 95%;
-                font-weight: 600;
-                border: 1px solid#ddd;
-                border-radius: 10px;" class="text-center p-5">
-              <p id='click'> {{ option }}</p>
-            </div>
-          </div>
-
-          {% endfor %}
-          <p id='click'> {{ correct_answer }}</p>
-          <a href="{% url 'result' no=800  category=category %}"><button type="submit"> Submit</button></a>
-
-          {% endfor %} -->
+          
           <!-- <p id='click'> {{ correct_answer }}</p> -->
           <p id='click'> </p>
-          <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a>
+          <a href="{% url 'result' no=800  category=category %}"><button type="submit"> Submit</button></a>
+          <!-- <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a> -->
           <a><button id="nextbtn" type="next" onclick=next()> next</button></a>
 
 
@@ -103,6 +89,8 @@
   }
   var rann = []
   var all
+  var cate
+  var diff
   window.onload = function () {
     $.ajax({
       // headers: { "X-CSRFToken": token },
@@ -110,6 +98,8 @@
       url: 'https://opentdb.com/api.php?amount=5&category={{ category_num }}&difficulty={{ dif }}&type=multiple',
       contentType: 'application/json; charset=utf-8',
       success: function (result) {
+        cate = result.results[0].category
+        diff = result.results[0].difficulty
         all = result.results
         $('#question')[0].innerHTML = all[0].question
         $('#click')[0].innerHTML = all[0].correct_answer
@@ -132,6 +122,7 @@
     // }
   };
   var page = 1
+  var score = 0;
   const next = () => {
     var temp2 = ran()
     rann=[]
@@ -162,13 +153,12 @@
       $("#nextbtn")[0].innerHTML = "result"
     }
     if (page == 5)
-      window.location.replace("/result/");
+      window.location.replace("/result/"+score+"/"+cate);
     page++
     console.log("score: ",score)
   }
   // console.log('{{questions}}')
   var done = true;
-  var score = 0;
   $('div.AnswersD').click(function (event) {
     // Don't follow the linkt
     if (done) {
@@ -179,6 +169,21 @@
       ans = event.target.innerText
       console.log(ans,page,"LLLlllllll")
       if (ans === all[page-1].correct_answer) {
+        switch (diff) {
+          case "easy":
+          score += 1
+            break;
+          case "medium":
+          score += 3
+            break;
+          case "hard":
+          score += 5
+            break;
+
+          default:
+            break;
+        }
+        
         console.log('TRUE');
         console.log(this);
         $(this).addClass("correct")
