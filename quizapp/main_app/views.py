@@ -12,10 +12,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
+from django.db.models import Q
 import requests
 import json
-import re
+
 
 def index(request):
     return render(request, 'welcome.html')
@@ -220,22 +220,24 @@ def html_decode(s):
         s = s.replace(code[1], code[0])
     return s
 
-@csrf_protect
-def result(request):
 
-    
-    no=request.GET.get('no')
-    # res =json.loads(no.text)
+
+def result(request,no,category):
     current_user = request.user
-    # Score.objects.filter(user_id=1).update(score=no)
-    e = Score.objects.get(user_id=1)
-    no = e.score
-    
-    print('225',request.method)
-    print('226',request.GET.get('no')) 
-    print('227',type(no)) 
-    
-    return render(request, 'Result.html',{'no':no, 'id':current_user.id})
+
+    c = Category.objects.get(name=category)
+    c_id = c.id
+
+    Score.objects.filter(Q(user_id=current_user.id), Q(category_id = c_id)).update(score=no)
+
+    #to get user's score
+    e = Score.objects.get(Q(user_id=current_user.id), Q(category_id = c_id))
+    score = e.score
+            
+    return render(request, 'Result.html',{
+        'no':score,
+        'category':category
+    })
 
 def top_five(request):
     users = Score.objects.order_by('-score')

@@ -9,7 +9,7 @@ urlpatterns = [
     path('quiz/create/', views.QuizCreate.as_view(), name='quiz_create'),
     path('quiz/<int:pk>/update/', views.QuizUpdate.as_view(), name='quiz_update'),
     path('quiz/<int:pk>/delete/', views.QuizDelete.as_view(), name='quiz_delete'),
-    path('levels/question/<int:category_num>/<dif>', views.question, name='question'),
+    path('levels/question/<int:category_num>/<dif>/', views.question, name='question'),
     path('questions/create/', views.QuestionsCreate.as_view(), name='questions_create'),
     path('questions/<int:pk>/update/', views.QuestionsUpdate.as_view(), name='questions_update'),
     path('questions/<int:pk>/delete/', views.QuestionsDelete.as_view(), name='questions_delete'),
@@ -23,7 +23,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('user/<username>/', views.Profile, name='profile'),
     path('category/', views.category, name='category'),
-    path('result/', views.result, name='result'),
+    path('result/<int:no>/<category>', views.result, name='result'),
     path('levels/', views.levels, name='levels'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name="password_reset_form.html"),{'post_reset_redirect': 'reset_password_done'}, name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name="password_reset_done.html"),name='password_reset_done'),
@@ -31,4 +31,4 @@ urlpatterns = [
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name="password_reset_complete.html"),name='password_reset_complete'),
     path('levels/<int:id>', views.levels, name='levels'),
     path('top_five/', views.top_five, name='top_five')
-] 
+]

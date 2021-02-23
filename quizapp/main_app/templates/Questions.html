@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-{% csrf_token %}
 
 <body>
   <audio id="CorrectAnswer" src="https://www.dropbox.com/s/corq44j1xt6wmk3/water.mp3?dl=1"></audio>
@@ -70,11 +69,17 @@
               <p id='click'> {{ option }}</p>
             </div>
           </div>
+
+          {% endfor %}
+          <p id='click'> {{ correct_answer }}</p>
+          <a href="{% url 'result' no=800  category=category %}"><button type="submit"> Submit</button></a>
+
           {% endfor %} -->
           <!-- <p id='click'> {{ correct_answer }}</p> -->
           <p id='click'> </p>
           <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a>
           <a><button id="nextbtn" type="next" onclick=next()> next</button></a>
+
 
         </div>
       </div>
@@ -88,13 +93,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <form action="." method="POST">
-      {% csrf_token %}
-   
-    <input type="hidden" name="score"> 5
-    <input type="submit" name="submit">
-  </form> -->
 
 </body>
 </div>
@@ -185,7 +183,6 @@
         console.log(this);
         $(this).addClass("correct")
         $(".correct div").css("background-color", "green");
-        score++
         // event.target.style.backgroundColor = 'Green';
         // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
         document.querySelector("#CorrectAnswer").play()
@@ -233,6 +230,22 @@
     });
 
   })
+
+//  function showPosition(){
+//   var data = {"no": "800", "category": '{{category}}'};
+//     var token = '{{csrf_token}}';
+
+
+// $.ajax({
+//     headers: { "X-CSRFToken": token },
+//     type: 'POST',
+//     url: '/result/',
+//     contentType: 'application/json; charset=utf-8',
+//     data: data,
+//     dataType: 'json',
+    
+// });
+//   }
 
   for (let i = 1; i < 6; i++) {
     console.log("qqqqqqqqqqqqqqqqqqqqqqq", typeof ('{{qq}}'))
