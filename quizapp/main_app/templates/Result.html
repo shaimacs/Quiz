@@ -1,51 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
 {% csrf_token %}
+
 <body>
     <div>
       <div class="container">
         <div class="header mt-5 border text-center mb-5">
-          <h1>{{no}}</h1>
-          <h1>{{id}}</h1>
-          <h1>{{c_id}}</h1>
           <h1>{{category}}</h1>
           <h3 class="p-3 text-center">Congrats🎉! You Finish your Quiz.</h3>
         </div>
         <div class="row mb-3">
-          <div class="col-12 mb-3 col-sm-4 d-flex justify-content-center align-items-center">
-            <div class="text-center p-3"
-              style="
-                width: 80%;
-                border: 1px solid #ddd;
-                border-radius: 10px;
-                font-weight: 600;">
-              <i class="fas fa-sort-numeric-up mr-2 font-weight-bold"></i>Your
-              Score: 15/20
-            </div>
-          </div>
-          <div class="col-12 mb-3 col-sm-4 d-flex justify-content-center align-items-center">
+          <div
+            class="col-12 mb-3 col-sm-4 d-flex justify-content-center align-items-center"
+          >
+
             <div
               class="text-center p-3"
               style="
                 width: 80%;
                 border: 1px solid #ddd;
                 border-radius: 10px;
-                font-weight: 600;">
+                font-weight: 600;
+              "
+            >
+              <i class="fas fa-sort-numeric-up mr-2 font-weight-bold"></i>Your
+              Score: {{no}}/5
+            </div>
+          </div>
+          <div
+            class="col-12 mb-3 col-sm-4 d-flex justify-content-center align-items-center"
+          >
+            <div
+              class="text-center p-3"
+              style="
+                width: 80%;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                font-weight: 600;
+              "
+            >
               <i class="far fa-clock mr-1 font-weight-bold"></i> Time: 15.5s
             </div>
           </div>
-          <div class="col-12 mb-3 col-sm-4 d-flex justify-content-center align-items-center">
+          <div
+            class="col-12 mb-3 col-sm-4 d-flex justify-content-center align-items-center"
+          >
             <div
               class="text-center p-3"
               style="
                 width: 80%;
                 border: 1px solid #ddd;
                 border-radius: 10px;
-                font-weight: 600;">
+                font-weight: 600;
+              "
+            >
               <i class="fas fa-trophy mr-1"></i> Win Streak: 5
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col text-center">
             <div style="margin-left: 10px">

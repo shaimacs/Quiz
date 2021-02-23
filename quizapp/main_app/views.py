@@ -91,14 +91,8 @@ def category(request):
     cat=''
     idd=[]
     cate=[]
-#fix this to (9,33)
-    # for i in range(9,33):
-        # response = requests.get('https://opentdb.com/api.php?amount=5&category={}&type=multiple'.format(i))
-        # qus_data=response.json()
     id_response = requests.get('https://opentdb.com/api_category.php')
     id_res =json.loads(id_response.text)
-        # res =json.loads(response.text)
-
     for i in id_res['trivia_categories']:
         cate.append({'name':i["name"],'id':i["id"]})
            
@@ -284,16 +278,12 @@ def top_five(request,category):
         })
 
 def category_top_five(request):
-    categories = []
-    cat=''
-    idd=[]
-    for i in range(9,33):
-        id_response = requests.get('https://opentdb.com/api_category.php')
-        id_res =json.loads(id_response.text)
-        for i in id_res['trivia_categories']:
-            cat.append({'name':i["name"],'id':i["id"]})
+    cate = []
+    id_response = requests.get('https://opentdb.com/api_category.php')
+    id_res =json.loads(id_response.text)
+    for i in id_res['trivia_categories']:
+        cate.append({'name':i["name"],'id':i["id"]})
                 
     return render(request,'category_top_five.html',{
-        'categories': categories
+        'categories': cate
     })
-    

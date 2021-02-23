@@ -38,9 +38,10 @@
         <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
       </li>                         
       {% else %}
+      <div class="topnav-right">
       <span><a href="{% url 'login' %}" >Login</a></span>
       <span> | </span>
-      <span><a href="{% url 'signup' %}">SignUp</a></span>
+      <span><a href="{% url 'signup' %}">SignUp</a></span></div>
       {% endif %}  
     </ul>
     

@@ -4,9 +4,8 @@
         <div class="container">
       <div class="col">
         <div class="row mt-4 top5_text_wrapper text-center">
-          <p class="m-auto top5_text text-white">Top 5</p>
+          <p class="m-auto top5_text text-white">Top 5 in {{category}}</p>
         </div>
-
         <div id="podium-box" class="row mt-4" style="height: 400px">
           <div class="col-sm-4 step-container m-0 p-0">
             <div class="winner_name">{{user5}}🎉</div>
@@ -15,6 +14,9 @@
               class="bg-blue step centerBoth podium-number"
             >
               5
+              <br>
+              {{score5}}
+              
             </div>
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
@@ -24,7 +26,11 @@
               class="bg-blue step centerBoth podium-number"
             >
               <i class="trophy fas fa-medal"></i>2
+              <br>
+
+              {{score2}}
             </div>
+           
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
             <div class="winner_name">{{user1}}🎉</div>
@@ -33,6 +39,10 @@
               class="bg-blue step centerBoth podium-number"
             >
               <i class="trophy fas fa-trophy"></i>1
+              
+              <br>
+              {{score1}}
+
             </div>
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
@@ -42,6 +52,9 @@
               class="bg-blue step centerBoth podium-number"
             >
               <i class="trophy fas fa-medal"></i>3
+              <br>
+
+              {{score3}}
             </div>
           </div>
           <div class="col-sm-4 step-container m-0 p-0">
@@ -51,6 +64,9 @@
               class="bg-blue step centerBoth podium-number"
             >
               4
+              <br>
+
+              {{score4}}
             </div>
           </div>
         </div>
