@@ -82,11 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Quiz',
         'USER': 'postgres',
-<<<<<<< HEAD
         'PASSWORD': 'Shaima1995'
-=======
-        'PASSWORD': '1234'
->>>>>>> 698cad21c01a4a44f15c5f55080383c519b2321a
     }
 }
 

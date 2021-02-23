@@ -14,7 +14,6 @@ urlpatterns = [
     path('questions/<int:pk>/update/', views.QuestionsUpdate.as_view(), name='questions_update'),
     path('questions/<int:pk>/delete/', views.QuestionsDelete.as_view(), name='questions_delete'),
     path('questions/', views.questionsShow, name='questions_show'),
-
     path('category/create/', views.CategoryCreate.as_view(), name='category_create'),
     path('category/<int:pk>/update/', views.CategoryUpdate.as_view(), name='category_update'),
     path('category/<int:pk>/delete/', views.CategoryDelete.as_view(), name='category_delete'),

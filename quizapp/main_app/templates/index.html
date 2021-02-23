@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
   <head>    
     <title>Home Page</title>     
   </head>
@@ -43,7 +42,44 @@
                  {% elif category.name == 'Entertainment: Music' %}
                  class="text-center bg-warning text-white"
                  {% elif category.name == 'Entertainment: Musicals & Theatres' %}
-                 class="text-center bg-dark text-white"               
+                 class="text-center bg-dark text-white"     
+                 {% elif category.name == 'Entertainment: Television' %}
+                 class="text-center bg-info text-white"
+                 {% elif category.name == 'Entertainment: Video Games' %}
+                 class="text-center bg-success text-white"
+                 {% elif category.name == 'Entertainment: Board Games' %}
+                 class="text-center bg-danger text-white"
+                 {% elif category.name == 'Science & Nature' %}
+                 class="text-center bg-warning text-white"
+                 {% elif category.name == 'Science: Computers' %}
+                 class="text-center bg-dark text-white" 
+                 {% elif category.name == 'Science: Mathematics' %}
+                 class="text-center bg-info text-white"
+                 {% elif category.name == 'Mythology' %}
+                 class="text-center bg-success text-white"
+                 {% elif category.name == 'Sports' %}
+                 class="text-center bg-danger text-white"
+                 {% elif category.name == 'Geography' %}
+                 class="text-center bg-warning text-white"
+                 {% elif category.name == 'History' %}
+                 class="text-center bg-dark text-white" 
+                 {% elif category.name == 'Politics' %}
+                 class="text-center bg-info text-white"
+                 {% elif category.name == 'Art' %}
+                 class="text-center bg-success text-white"
+                 {% elif category.name == 'Celebrities' %}
+                 class="text-center bg-danger text-white"
+                 {% elif category.name == 'Animals' %}
+                 class="text-center bg-warning text-white"
+                 {% elif category.name == 'Vehicles' %}
+                 class="text-center bg-dark text-white" 
+                 {% elif category.name == 'Entertainment: Comics' %}
+                 class="text-center bg-info text-white"
+                 {% elif category.name == 'Science: Gadgets' %}
+                 class="text-center bg-success text-white"
+                 {% elif category.name == 'Entertainment: Japanese Anime & Manga' %}
+                 class="text-center bg-danger text-white"
+                 {% elif category.name == 'Entertainment: Cartoon & Animations' %}
                  {% endif %}
               >
                 {{category.name}}
@@ -51,88 +87,9 @@
             </a>
             </div>
             {% endfor%}
-          
-
-            <!-- <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
-            > -->
-              <!-- <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5 bg-success text-white"
-              > -->
-                <!-- <i class="fas fa-vials mr-2"></i> Science
-              </div>
-            </div>
-            <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5 bg-warning text-white"
-              >
-                <i class="fas fa-quote-right mr-2"></i> Quotes
-              </div>
-            </div>
-            <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5 bg-danger text-white"
-              >
-                <i class="fas fa-desktop mr-2"></i>Computer Science
-              </div>
-            </div>
-            <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5 bg-primary text-white"
-              >
-                <i class="fab fa-readme mr-2"></i> Social Study
-              </div>
-            </div>
-            <div
-              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
-            >
-              <div
-                style="
-                  width: 95%;
-                  font-weight: 600;
-                  border: 1px solid#ddd;
-                  border-radius: 10px;
-                "
-                class="text-center p-5 bg-secondary text-white"
-              >
-                <i class="fas fa-paint-brush mr-2"></i> Creative Art
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
     </div>
   </body>
- 
-
 {% endblock %}

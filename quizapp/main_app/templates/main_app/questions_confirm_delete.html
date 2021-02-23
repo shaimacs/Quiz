@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Delete question</h1>
+<p>Are you sure you want to delete this question: {{ questions }}?</p>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes, delete.">
+</form>
+{% endblock %}

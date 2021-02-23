@@ -19,7 +19,6 @@ and
 ```
 python3 manage.py migrate
 ```
-<br>
 Run 
 ```
 python manage.py runserver
@@ -29,23 +28,24 @@ to start your server.<br>
 
 
 ### User Stories 
--The user should be able to sign up.
--The user should be able to login. 
--The user should be able to reset the password.
--The user should be able to select the category of the quiz.
--The user should be able to select the level of the quiz.
--The user should be able to see the result of the quiz.
--The user should be able to see the top 5 competitors.
--The admin should be able to do add a new Quiz.
--The admin should be able to edit the quiz.
--The admin should be able to delete the quiz.
+-The user should be able to sign up. <br>
+-The user should be able to login. <br>
+-The user should be able to reset the password.<br>
+-The user should be able to select the category of the quiz.<br>
+-The user should be able to select the level of the quiz.<br>
+-The user should be able to see the result of the quiz.<br>
+-The user should be able to see the top 5 competitors.<br>
+-The admin should be able to do add a new Quiz.<br>
+-The admin should be able to edit the quiz.<br>
+-The admin should be able to delete the quiz.<br>
 
 
 ### WireFrames
 > WireFrame.
-<img src = "Images/WireFrame1.jpeg" > 
-| WireFrame1      | col 2      | WireFreame1      | col 2      | WireFreame1      | col 2      |
+
+| Category page      | Levels page      | Questions Page      | col 2      | WireFreame1      | col 2      |
 |------------|-------------|------------|-------------|------------|-------------|
+|<img src = "Images/categeory.jpeg" width="100%"> | <img src = "Images/levels.jpeg" width="100%">| <img src = "Images/questions.jpeg" width="100%">
 
 
 
@@ -105,6 +105,7 @@ Many many thanks to: JRJS\
 [Raymond](https://git.generalassemb.ly/raymond)\
 [Jaber alsalamah](https://git.generalassemb.ly/jaberalsalamah)\
 [Sameh kinawy](https://git.generalassemb.ly/samehkinawy)
+[Sara Kuddah]
 
 
 ### Resourses 
