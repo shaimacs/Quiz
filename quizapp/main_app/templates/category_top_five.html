@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <head>    
+    <title>Home Page</title>     
+  </head>
+  <body>
+    <div>
+      <div class="container">
+        <div class="header text-center">
+          <h2 class="p-3 text-center bg-primary text-white">
+            <i class="fas fa-brain mr-2"></i>Take Quiz & Challenge Yourself
+          </h2>
+        </div>
+        
+        <div class="menu_item">
+          <div class="row" id="cat_row">
+            
+            {% for category in categories%}
+            <a href="{% url 'top_five' category=category.name %}">
+            <div
+              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+            >
+            
+              <div
+                style="
+                   width: 200px;
+                  height: 150px;
+                  font-weight: 600;
+                  border: 1px solid#ddd;
+                  border-radius: 10px;
+                  padding: 8px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;              
+                "
+                 {% if category.name == 'General Knowledge' %}
+                 class="text-center bg-info text-white"
+                 {% elif category.name == 'Entertainment: Books' %}
+                 class="text-center bg-success text-white"
+                 {% elif category.name == 'Entertainment: Film' %}
+                 class="text-center bg-danger text-white"
+                 {% elif category.name == 'Entertainment: Music' %}
+                 class="text-center bg-warning text-white"
+                 {% elif category.name == 'Entertainment: Musicals & Theatres' %}
+                 class="text-center bg-dark text-white"               
+                 {% endif %}
+              >
+                {{category.name}}
+              </div>
+            </a>
+            </div>
+            {% endfor%}
+          
+
+            <!-- <div
+              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+            > -->
+              <!-- <div
+                style="
+                  width: 95%;
+                  font-weight: 600;
+                  border: 1px solid#ddd;
+                  border-radius: 10px;
+                "
+                class="text-center p-5 bg-success text-white"
+              > -->
+                <!-- <i class="fas fa-vials mr-2"></i> Science
+              </div>
+            </div>
+            <div
+              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+            >
+              <div
+                style="
+                  width: 95%;
+                  font-weight: 600;
+                  border: 1px solid#ddd;
+                  border-radius: 10px;
+                "
+                class="text-center p-5 bg-warning text-white"
+              >
+                <i class="fas fa-quote-right mr-2"></i> Quotes
+              </div>
+            </div>
+            <div
+              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+            >
+              <div
+                style="
+                  width: 95%;
+                  font-weight: 600;
+                  border: 1px solid#ddd;
+                  border-radius: 10px;
+                "
+                class="text-center p-5 bg-danger text-white"
+              >
+                <i class="fas fa-desktop mr-2"></i>Computer Science
+              </div>
+            </div>
+            <div
+              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+            >
+              <div
+                style="
+                  width: 95%;
+                  font-weight: 600;
+                  border: 1px solid#ddd;
+                  border-radius: 10px;
+                "
+                class="text-center p-5 bg-primary text-white"
+              >
+                <i class="fab fa-readme mr-2"></i> Social Study
+              </div>
+            </div>
+            <div
+              class="col-12 col-sm-4 mb-3 d-flex justify-content-center align-items-center"
+            >
+              <div
+                style="
+                  width: 95%;
+                  font-weight: 600;
+                  border: 1px solid#ddd;
+                  border-radius: 10px;
+                "
+                class="text-center p-5 bg-secondary text-white"
+              >
+                <i class="fas fa-paint-brush mr-2"></i> Creative Art
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+ 
+
+{% endblock %}

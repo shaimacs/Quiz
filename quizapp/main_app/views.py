@@ -251,5 +251,68 @@ def top_five(request):
         })
 
 
+def result(request,score,category):
+    current_user = request.user
 
+    c = Category.objects.get(name=category)
+    c_id = c.id
+
+    Score.objects.filter(Q(user_id=current_user.id), Q(category_id = c_id)).update(score=score)
+
+    #to get user's score
+    e = Score.objects.get(Q(user_id=current_user.id), Q(category_id = c_id))
+    user_score = e.score
+            
+    return render(request, 'Result.html',{
+        'no':user_score,
+        'category':category
+    })
+
+def top_five(request,category):
+    score = []
+    c = Category.objects.get(name=category)
+    c_id = c.id
+
+    users = Score.objects.order_by('-score').filter(category_id = c_id)
+    for i in range(5):
+        score.append(users[i].score)
+
+    return render(request, 'top.html',{
+        'category':category,
+        'user1':users[0],
+        'score1':score[0],
+        'user2':users[1],
+        'score2':score[1],
+        'user3':users[2],
+        'score3':score[2],
+        'user4':users[3],
+        'score4':score[3],
+        'user5':users[4],
+        'score5':score[4]
+        })
+
+def category_top_five(request):
+    categories = []
+    cat=''
+    idd=[]
+#fix this to (9,33)
+    for i in range(9,14):
+        response = requests.get('https://opentdb.com/api.php?amount=10&category={}&type=multiple'.format(i))
+        # qus_data=response.json()
+        id_response = requests.get('https://opentdb.com/api_category.php')
+        id_res =json.loads(id_response.text)
+        res =json.loads(response.text)
+
+        for i in id_res['trivia_categories']:
+            if(res["results"][0]["category"] == i['name']):
+                idd=i['id']
+                cat=i['name']
+                if (len(res["results"]) < 1 ):
+                    pass
+                else:
+                    categories.append({'name':res["results"][0]["category"]})
+                break
+    return render(request,'category_top_five.html',{
+        'categories': categories
+    })
     
