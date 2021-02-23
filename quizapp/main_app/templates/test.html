@@ -1,24 +1,327 @@
-
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>QuizApp</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
-</head>
+{% block content %}
 
 <body>
-  
-    <h1>Api TEST</h1>
-    {% for c in categories %}
-<p>Data => {{ c }}</p>
-{% endfor %}
-<!-- <p>HHH {{num}}</p> -->
-    <footer>
-        All Rights Reserved, QuizApp 2021
-    </footer>
-</body>
+  <audio id="CorrectAnswer" src="https://www.dropbox.com/s/corq44j1xt6wmk3/water.mp3?dl=1"></audio>
+  <audio id="WrongAnswer" src="https://www.dropbox.com/s/xxx4y9wbiabslrq/Tie.mp3?dl=1"></audio>
+  <div>
+    <div class="container">
+      <div class="header text-center mb-5">
+        <h3 class="p-3 text-center bg-primary text-white">
+          {{category}}
+        </h3>
+      </div>
+      <div class="row">
+        <div class="col-12 mb-2">
+          <div class="d-flex align-items-center p-1" style="margin-left: 9px; border-bottom: 2px solid #ddd">
+            <i class="fas font-weight-bold text-danger fa-question mr-3" style="font-size: 2rem"></i>
+            <!-- <h1 id ="Timer"></h1> -->
+            <!-- <h5 id="question">{{question}}</h5> -->
+            <h5 id="question"> Loading... </h5>
+          </div>
+        </div>
+      </div>
+      <div class="menu_item">
+        <div class="row">
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans1" id='click'> Loading... </p>
+            </div>
+          </div>
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans2" id='click'> Loading... </p>
+            </div>
+          </div>
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans3" id='click'> Loading... </p>
+            </div>
+          </div>
+          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+            <div style="
+                width: 95%;
+                font-weight: 600;
+                border: 1px solid#ddd;
+                border-radius: 10px;" class="text-center p-5">
+              <p id="ans4" id='click'> Loading... </p>
+            </div>
+          </div>
+          <!-- <p id='click'> {{ correct_answer }}</p> -->
+          <p id='click'> </p>
+          <!-- <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a> -->
+          <a><button id="nextbtn" type="next" onclick=next()> next</button></a>
 
-</html>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div style="margin-left: 10px">
+            <button class="btn btn-outline-warning" id="help" data-toggle="modal" data-target="#helpmodal">
+              Need Help<i class="fas fa-question ml-2"></i>
+            </button>
+          </div>
+          <div class="p-5"></div>
+          <div class="modal fade" id="helpmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Need Help?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div style="width: 150px; height: 150px;" class="m-auto">
+                    <img style="width: 100%;" src="{% static 'help.jpg' %}" alt="img" />
+                  </div>
+                  <p class="text-center font-weight-bold" style="margin-bottom: 0;">
+                    Are you sure you need help?
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success">Yes</button>                 
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+</div>
+<script>
+
+  const ran = () => {
+    return Math.floor(1 + Math.random() * 4)
+  }
+  var rann = []
+  var all
+  var cate
+  var diff
+  // window.onload = function () {
+    $.ajax({
+      // headers: { "X-CSRFToken": token },
+      type: 'GET',
+      url: 'https://opentdb.com/api.php?amount=5&category={{ category_num }}&difficulty={{ dif }}&type=multiple',
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) {
+        cate = result.results[0].category
+        diff = result.results[0].difficulty
+        all = result.results
+        $('#question')[0].innerHTML = all[0].question
+        $('#click')[0].innerHTML = all[0].correct_answer
+        var temp = ran()
+        rann.push(temp)
+        $('#ans' + temp)[0].innerHTML = all[0].correct_answer
+        for (let i = 0; i < 3; i++) {
+          temp1 = ran()
+          while (rann.includes(temp1) && rann.length < 4) {
+            temp1 = ran()
+          }
+          rann.push(temp1)
+          $('#ans' + temp1)[0].innerHTML = all[0].incorrect_answers[i]
+        }
+        console.log("score: ", score)
+      }
+    })
+    // for (let i = 1; i < 5; i++) {
+    //   document.getElementById('ans'+i).innerHTML = ;
+    // }
+  // };
+  var page = 1
+  var score = 0;
+  const next = () => {
+    if (!done) {
+      var temp2 = ran()
+      rann = []
+      $(".correct div").css("background-color", "");
+      $(".wrong div").css("background-color", "");
+      $(".wrong").removeClass("wrong")
+      $(".correct").removeClass("correct")
+      clicked()
+      if (page <= 4) {
+        $('#question')[0].innerHTML = all[page].question
+        $('#click')[0].innerHTML = all[page].correct_answer
+        var tempp = ran()
+        rann.push(tempp)
+        $('#ans' + tempp)[0].innerHTML = all[page].correct_answer
+        console.log("correct", all[page].correct_answer)
+        for (let i = 0; i < 3; i++) {
+          temp2 = ran()
+          while (rann.includes(temp2) && rann.length < 4) {
+            temp2 = ran()
+          }
+          rann.push(temp2)
+
+          $('#ans' + temp2)[0].innerHTML = all[page].incorrect_answers[i]
+        }
+
+      }
+      if (page >= 4) {
+        $("#nextbtn")[0].innerHTML = "result"
+      }
+      if (page == 5)
+        window.location.replace("/result/" + score + "/" + cate);
+      page++
+      console.log("score: ", score)
+    } else {
+      alert("You have to choose an answer")
+    }
+
+  }
+  // console.log('{{questions}}')
+  var done = true;
+  $('div.AnswersD').click(function (event) {
+    // Don't follow the linkt
+    if (done) {
+      clicked()
+      event.preventDefault();
+      // Log the clicked element in the console
+      console.log(event.target.innerText);
+      ans = event.target.innerText
+      console.log(ans, page, "LLLlllllll")
+      if (ans === all[page - 1].correct_answer) {
+        switch (diff) {
+          case "easy":
+            score += 1
+            break;
+          case "medium":
+            score += 3
+            break;
+          case "hard":
+            score += 5
+            break;
+
+          default:
+            break;
+        }
+
+        console.log('TRUE');
+        console.log(this);
+        $(this).addClass("correct")
+        $(".correct div").css("background-color", "green");
+        // event.target.style.backgroundColor = 'Green';
+        // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
+        document.querySelector("#CorrectAnswer").play()
+
+        // location.reload();
+      }
+      else {
+        console.log('FALSE')
+        console.log(done)
+        $(this).addClass("wrong")
+        $(".wrong div").css("background-color", "red");
+        // event.target.style.backgroundColor = 'Red';
+        document.querySelector("#WrongAnswer").play()
+        // location.reload();
+
+      }
+    } else {
+      console.log("cant click again")
+    }
+    console.log("score: ", score)
+  });
+  const clicked = () => {
+    done = !done
+  }
+  var r = Math.floor(Math.random() * 3)
+  // var rr = all[page-1].incorrect_answers[r]
+  $('#help').click(function (event) {
+    console.log($('div.AnswersD')[0].innerText)
+    event.preventDefault();
+
+
+    // if ( r != all[page].correct_answer) {
+    console.log(r)
+    // alert('wrong answer => '+ rr)
+    console.log('wrong answer => ', all[page - 1].incorrect_answers[r])
+    // }
+    // $.ajax({
+    //   // headers: { "X-CSRFToken": token },
+    //   type: 'GET',
+    //   url: 'https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple',
+    //   contentType: 'application/json; charset=utf-8',
+    //   success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result.results) }
+    // });
+
+  })
+
+  //  function showPosition(){
+  //   var data = {"no": "800", "category": '{{category}}'};
+  //     var token = '{{csrf_token}}';
+
+
+  // $.ajax({
+  //     headers: { "X-CSRFToken": token },
+  //     type: 'POST',
+  //     url: '/result/',
+  //     contentType: 'application/json; charset=utf-8',
+  //     data: data,
+  //     dataType: 'json',
+
+  // });
+  //   }
+
+  for (let i = 1; i < 6; i++) {
+    console.log("qqqqqqqqqqqqqqqqqqqqqqq", typeof ('{{qq}}'))
+
+  }
+
+  console.log('{{correct_answer}}')
+  function showPosition() {
+    var data = { no: 700 };
+    var token = '{{csrf_token}}';
+    $.ajax({
+      // headers: { "X-CSRFToken": token },
+      type: 'GET',
+      url: '/result/',
+      data: data,
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result) }
+    });
+
+    // $.ajax({
+    //   // headers: { "X-CSRFToken": token },
+    //   type: 'GET',
+    //   url: '/result/',
+    //   contentType: 'application/json; charset=utf-8',
+    //   data: data,
+    //   dataType: 'text',
+
+    // });
+  }
+
+
+  function showNext() {
+    let hh = parseInt(window.location.pathname.slice(17, 19))
+    let hr = 'http://127.0.0.1:8000/levels/question/' + (hh + 1) + '/hard'
+    console.log("next", typeof (hh), hr, hr + 1)
+    window.location.replace(hr);
+  }
+
+
+// $(function () {
+//  var liftoffTime = new Date();
+//   liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, 26);
+//   $('#Timer').countdown({until: liftoffTime, format: 'MS'});
+//  $('#year').text(austDay.getFullYear());
+// });
+</script>
+{% endblock %}

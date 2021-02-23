@@ -22,13 +22,13 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('user/<username>/', views.Profile, name='profile'),
     path('category/', views.category, name='category'),
-    path('result/<int:no>/<category>', views.result, name='result'),
+    path('result/<int:score>/<category>', views.result, name='result'),
     path('levels/', views.levels, name='levels'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name="password_reset_form.html"),{'post_reset_redirect': 'reset_password_done'}, name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name="password_reset_done.html"),name='password_reset_done'),
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html"),name='password_reset_confirm'),
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name="password_reset_complete.html"),name='password_reset_complete'),
     path('levels/<int:id>', views.levels, name='levels'),
-     path('top_five/<category>', views.top_five, name='top_five'),
-    path('category_for_top_five/', views.category_top_five, name='category_top_five')
+    path('top_five/', views.top_five, name='top_five'),
+    path('sei/', views.sei, name='sei')
 ]

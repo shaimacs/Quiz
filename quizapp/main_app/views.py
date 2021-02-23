@@ -121,10 +121,14 @@ def signup(request):
     else:
         form = CreateUserForm()
         return render(request, 'signup.html', {'form': form})
+
+
 def Profile(request, username):
     user = User.objects.get(username=username)
     quiz = Quiz.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
+
+
 def question(request,category_num,dif):
     options=set()
     response = requests.get('https://opentdb.com/api.php?amount=5&category={}&difficulty={}&type=multiple'.format(category_num,dif))
@@ -139,7 +143,8 @@ def question(request,category_num,dif):
         'question':question,
         'options':options,
         'correct_answer':res['results'][0]['correct_answer'],
-        'category':res["results"][0]["category"]
+        'category':res["results"][0]["category"],
+        'category_num':category_num
         })
 # def question(request,category_num,dif):
 #     options=set()
@@ -199,6 +204,8 @@ def top_five(request):
         'user4':users[3],
         'user5':users[4],
         })
+
+
 def result(request,score,category):
     current_user = request.user
     c = Category.objects.get(name=category)
@@ -240,5 +247,12 @@ def category_top_five(request):
 
     return render(request,'category_top_five.html',{
         'categories': cate
+    })
+
+def sei(request):
+    q=Questions.objects.all()
+
+    return render(request,'test.html',{
+        'q':q 
     })
 

@@ -62,7 +62,7 @@
           </div>
           <!-- <p id='click'> {{ correct_answer }}</p> -->
           <p id='click'> </p>
-          <!-- <a href="{% url 'result' no=800  category=category %}"><button type="submit"> Submit</button></a> -->
+         
           <!-- <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a> -->
           <a><button id="nextbtn" type="next" class="next round" style ="text-decoration: none;
             display: inline-block;
@@ -143,6 +143,7 @@
           $('#ans' + temp1)[0].innerHTML = all[0].incorrect_answers[i]
         }
         console.log("score: ", score)
+        console.log("{{ category_num }} ",cate)
       }
     })
     // for (let i = 1; i < 5; i++) {
