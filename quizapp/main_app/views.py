@@ -15,77 +15,59 @@ from django.utils.decorators import method_decorator
 from django.db.models import Q
 import requests
 import json
-
-
 def index(request):
     return render(request, 'welcome.html')
-
 def quiz_index(request):
     quiz = Quiz.objects.all()
     return render(request, 'quiz/index.html', {'quiz': quiz})
-
 def quiz_show(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     return render(request, 'quiz/show.html', {'quiz': quiz})
-
 class QuizCreate(CreateView):
     model = Quiz
     fields = '__all__'
     success_url = '/quiz'
-
 class QuestionsCreate(CreateView):
     model = Questions
     fields = '__all__'
     success_url = '/questions'
-
 class CategoryCreate(CreateView):
     model = Category
     fields = '__all__'
     success_url = '/category'
-
 class QuizUpdate(UpdateView):
     model = Quiz
     fields = '__all__'
-
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/quiz/' + str(self.object.pk))
-
 class QuestionsUpdate(UpdateView):
     model = Questions
     fields = '__all__'
-
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/questions/' + str(self.object.pk))
-
 class CategoryUpdate(UpdateView):
     model = Category
     fields = '__all__'
-
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/category/' + str(self.object.pk))
-
 def questionsShow(request):
     questions = Questions.objects.all()
     return render(request, 'main_app/questions_show.html', {'questions': questions})
-
 class QuizDelete(DeleteView):
     model = Quiz
     success_url = '/quiz'
-
 class QuestionsDelete(DeleteView):
     model = Questions
     success_url = '/questions'
-
 class CategoryDelete(DeleteView):
     model = Category
     success_url = '/category'
-
 def category(request):
     categories = []
     cat=''
@@ -95,14 +77,12 @@ def category(request):
     id_res =json.loads(id_response.text)
     for i in id_res['trivia_categories']:
         cate.append({'name':i["name"],'id':i["id"]})
-           
+
     return render(request,'index.html',{
         'categories' : cate
     })
-    
 def levels(request,id):
     return render(request,'levels.html',{'id':id})
-
 def login_view(request):
     if request.method == 'POST':
         # if post, then authenticate (user submitted username and password)
@@ -122,11 +102,9 @@ def login_view(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
-
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
-
 def signup(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
@@ -140,12 +118,10 @@ def signup(request):
     else:
         form = CreateUserForm()
         return render(request, 'signup.html', {'form': form})
-    
 def Profile(request, username):
     user = User.objects.get(username=username)
     quiz = Quiz.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
-
 def question(request,category_num,dif):
     options=set()
     response = requests.get('https://opentdb.com/api.php?amount=5&category={}&difficulty={}&type=multiple'.format(category_num,dif))
@@ -162,7 +138,6 @@ def question(request,category_num,dif):
         'correct_answer':res['results'][0]['correct_answer'],
         'category':res["results"][0]["category"]
         })
-
 # def question(request,category_num,dif):
 #     options=set()
 #     # options2=set()
@@ -172,18 +147,14 @@ def question(request,category_num,dif):
 #     res =json.loads(response.text)
 #     #put all answers in set 
 #     for i in range(5):
-
 #         options.add(res['results'][i]['correct_answer'])
 #         for x in res['results'][i]['incorrect_answers']:
 #             options.add(x)
-
 #         question=res["results"][i]["question"]
 #         question =html_decode(question)
 #         questions_list.append({'q':question,'options':options})
-  
 #     # for i in options:
 #     #     options2.add(html_decode(i))
-
 #     return render(request, 'Questions.html',{
 #         'questions':questions_list,
 #         'options':options,
@@ -191,7 +162,6 @@ def question(request,category_num,dif):
 #         'correct_answer':res['results'][0]['correct_answer'],
 #         'category':res["results"][0]["category"]
 #         })
-
 def html_decode(s):
     htmlCodes = (
             ("'", '&#39;'),
@@ -205,29 +175,20 @@ def html_decode(s):
     for code in htmlCodes:
         s = s.replace(code[1], code[0])
     return s
-
-
-
 def result(request,no,category):
     current_user = request.user
-
     c = Category.objects.get(name=category)
     c_id = c.id
-
     Score.objects.filter(Q(user_id=current_user.id), Q(category_id = c_id)).update(score=no)
-
     #to get user's score
     e = Score.objects.get(Q(user_id=current_user.id), Q(category_id = c_id))
     score = e.score
-            
     return render(request, 'Result.html',{
         'no':score,
         'category':category
     })
-
 def top_five(request):
     users = Score.objects.order_by('-score')
-
     return render(request, 'top.html',{
         'user1':users[0],
         'user2':users[1],
@@ -235,34 +196,25 @@ def top_five(request):
         'user4':users[3],
         'user5':users[4],
         })
-
-
 def result(request,score,category):
     current_user = request.user
-
     c = Category.objects.get(name=category)
     c_id = c.id
-
     Score.objects.filter(Q(user_id=current_user.id), Q(category_id = c_id)).update(score=score)
-
     #to get user's score
     e = Score.objects.get(Q(user_id=current_user.id), Q(category_id = c_id))
     user_score = e.score
-            
     return render(request, 'Result.html',{
         'no':user_score,
         'category':category
     })
-
 def top_five(request,category):
     score = []
     c = Category.objects.get(name=category)
     c_id = c.id
-
     users = Score.objects.order_by('-score').filter(category_id = c_id)
     for i in range(5):
         score.append(users[i].score)
-
     return render(request, 'top.html',{
         'category':category,
         'user1':users[0],
@@ -276,14 +228,14 @@ def top_five(request,category):
         'user5':users[4],
         'score5':score[4]
         })
-
 def category_top_five(request):
     cate = []
     id_response = requests.get('https://opentdb.com/api_category.php')
     id_res =json.loads(id_response.text)
     for i in id_res['trivia_categories']:
         cate.append({'name':i["name"],'id':i["id"]})
-                
+
     return render(request,'category_top_five.html',{
         'categories': cate
     })
+
