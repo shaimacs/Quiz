@@ -90,7 +90,7 @@
   var all
   var cate
   var diff
-  window.onload = function () {
+  // window.onload = function () {
     $.ajax({
       // headers: { "X-CSRFToken": token },
       type: 'GET',
@@ -113,48 +113,53 @@
           rann.push(temp1)
           $('#ans' + temp1)[0].innerHTML = all[0].incorrect_answers[i]
         }
-        console.log("score: ",score)
+        console.log("score: ", score)
       }
     })
     // for (let i = 1; i < 5; i++) {
     //   document.getElementById('ans'+i).innerHTML = ;
     // }
-  };
+  // };
   var page = 1
   var score = 0;
   const next = () => {
-    var temp2 = ran()
-    rann=[]
-    $(".correct div").css("background-color", "");
-    $(".wrong div").css("background-color", "");
-    $(".wrong").removeClass("wrong")
-    $(".correct").removeClass("correct")
-    clicked()
-    if (page <= 4) {
-      $('#question')[0].innerHTML = all[page].question
-      $('#click')[0].innerHTML = all[page].correct_answer
-      var tempp = ran()
-      rann.push(tempp)
-      $('#ans' + tempp)[0].innerHTML = all[page].correct_answer
-      console.log("correct",all[page].correct_answer)
-      for (let i = 0; i < 3; i++) {
-        temp2 = ran()
-        while (rann.includes(temp2) && rann.length < 4) {
+    if (!done) {
+      var temp2 = ran()
+      rann = []
+      $(".correct div").css("background-color", "");
+      $(".wrong div").css("background-color", "");
+      $(".wrong").removeClass("wrong")
+      $(".correct").removeClass("correct")
+      clicked()
+      if (page <= 4) {
+        $('#question')[0].innerHTML = all[page].question
+        $('#click')[0].innerHTML = all[page].correct_answer
+        var tempp = ran()
+        rann.push(tempp)
+        $('#ans' + tempp)[0].innerHTML = all[page].correct_answer
+        console.log("correct", all[page].correct_answer)
+        for (let i = 0; i < 3; i++) {
           temp2 = ran()
-        }
-        rann.push(temp2)
-        
-        $('#ans' + temp2)[0].innerHTML = all[page].incorrect_answers[i]
-      }
+          while (rann.includes(temp2) && rann.length < 4) {
+            temp2 = ran()
+          }
+          rann.push(temp2)
 
+          $('#ans' + temp2)[0].innerHTML = all[page].incorrect_answers[i]
+        }
+
+      }
+      if (page >= 4) {
+        $("#nextbtn")[0].innerHTML = "result"
+      }
+      if (page == 5)
+        window.location.replace("/result/" + score + "/" + cate);
+      page++
+      console.log("score: ", score)
+    } else {
+      alert("You have to choose an answer")
     }
-    if (page >= 4) {
-      $("#nextbtn")[0].innerHTML = "result"
-    }
-    if (page == 5)
-      window.location.replace("/result/"+score+"/"+cate);
-    page++
-    console.log("score: ",score)
+
   }
   // console.log('{{questions}}')
   var done = true;
@@ -166,23 +171,23 @@
       // Log the clicked element in the console
       console.log(event.target.innerText);
       ans = event.target.innerText
-      console.log(ans,page,"LLLlllllll")
-      if (ans === all[page-1].correct_answer) {
+      console.log(ans, page, "LLLlllllll")
+      if (ans === all[page - 1].correct_answer) {
         switch (diff) {
           case "easy":
-          score += 1
+            score += 1
             break;
           case "medium":
-          score += 3
+            score += 3
             break;
           case "hard":
-          score += 5
+            score += 5
             break;
 
           default:
             break;
         }
-        
+
         console.log('TRUE');
         console.log(this);
         $(this).addClass("correct")
@@ -201,55 +206,53 @@
         // event.target.style.backgroundColor = 'Red';
         document.querySelector("#WrongAnswer").play()
         // location.reload();
-        
+
       }
     } else {
       console.log("cant click again")
     }
-    console.log("score: ",score)
+    console.log("score: ", score)
   });
   const clicked = () => {
     done = !done
   }
-
+  var r = Math.floor(Math.random() * 3)
+  // var rr = all[page-1].incorrect_answers[r]
   $('#help').click(function (event) {
+    console.log($('div.AnswersD')[0].innerText)
     event.preventDefault();
-    console.log('help', '{{options}}')
 
-    for (var i = 0; i < 1; i++) {
 
-      "{% for i in options %}"
-      if ('{{i}}' != '{{correct_answer}}') {
-        console.log('wrong answer => ', '{{i}}')
-        break
-      }
-      "{% endfor %}"
-    }//end for js
-    $.ajax({
-      // headers: { "X-CSRFToken": token },
-      type: 'GET',
-      url: 'https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple',
-      contentType: 'application/json; charset=utf-8',
-      success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result.results) }
-    });
+    // if ( r != all[page].correct_answer) {
+    console.log(r)
+    // alert('wrong answer => '+ rr)
+    console.log('wrong answer => ', all[page - 1].incorrect_answers[r])
+    // }
+    // $.ajax({
+    //   // headers: { "X-CSRFToken": token },
+    //   type: 'GET',
+    //   url: 'https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple',
+    //   contentType: 'application/json; charset=utf-8',
+    //   success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result.results) }
+    // });
 
   })
 
-//  function showPosition(){
-//   var data = {"no": "800", "category": '{{category}}'};
-//     var token = '{{csrf_token}}';
+  //  function showPosition(){
+  //   var data = {"no": "800", "category": '{{category}}'};
+  //     var token = '{{csrf_token}}';
 
 
-// $.ajax({
-//     headers: { "X-CSRFToken": token },
-//     type: 'POST',
-//     url: '/result/',
-//     contentType: 'application/json; charset=utf-8',
-//     data: data,
-//     dataType: 'json',
-    
-// });
-//   }
+  // $.ajax({
+  //     headers: { "X-CSRFToken": token },
+  //     type: 'POST',
+  //     url: '/result/',
+  //     contentType: 'application/json; charset=utf-8',
+  //     data: data,
+  //     dataType: 'json',
+
+  // });
+  //   }
 
   for (let i = 1; i < 6; i++) {
     console.log("qqqqqqqqqqqqqqqqqqqqqqq", typeof ('{{qq}}'))
