@@ -50,6 +50,7 @@ to start your server.<br>
 
 
 ### Folder Structure 
+```
 ├── Quiz
 │   └── main_app
 │       ├── components
@@ -90,7 +91,7 @@ to start your server.<br>
 ├── env
 ├── .gitignore
 └── README.md
-
+```
 # Use
 Either download the project or [Use it online]()
 <br><br><br>
