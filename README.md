@@ -114,10 +114,6 @@ Either download the project or [Use it online](https://brain-quizy.herokuapp.com
 ## API :
 [Api Link](https://opentdb.com/api_config.php)
 
-## Run Requirement:
-All application components are usable across modern desktop, tablet and phone browsers.
-<br>
-
 
 ## Future Features: 
 - [ ] Add a Timer to the Quiz. 
