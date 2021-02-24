@@ -23,18 +23,22 @@ def quiz_index(request):
 def quiz_show(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     return render(request, 'quiz/show.html', {'quiz': quiz})
+@method_decorator(login_required, name='dispatch')
 class QuizCreate(CreateView):
     model = Quiz
     fields = '__all__'
     success_url = '/quiz'
+@method_decorator(login_required, name='dispatch')
 class QuestionsCreate(CreateView):
     model = Questions
     fields = '__all__'
     success_url = '/questions'
+@method_decorator(login_required, name='dispatch')
 class CategoryCreate(CreateView):
     model = Category
     fields = '__all__'
     success_url = '/category'
+@method_decorator(login_required, name='dispatch')
 class QuizUpdate(UpdateView):
     model = Quiz
     fields = '__all__'
@@ -42,6 +46,7 @@ class QuizUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/quiz/' + str(self.object.pk))
+@method_decorator(login_required, name='dispatch')
 class QuestionsUpdate(UpdateView):
     model = Questions
     fields = '__all__'
@@ -50,6 +55,7 @@ class QuestionsUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/questions/')
 
+@method_decorator(login_required, name='dispatch')
 class CategoryUpdate(UpdateView):
     model = Category
     fields = '__all__'
@@ -57,18 +63,24 @@ class CategoryUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/category/' + str(self.object.pk))
+
 def questionsShow(request):
     questions = Questions.objects.all()
     return render(request, 'main_app/questions_show.html', {'questions': questions})
+@method_decorator(login_required, name='dispatch')
 class QuizDelete(DeleteView):
     model = Quiz
     success_url = '/quiz'
+@method_decorator(login_required, name='dispatch')
 class QuestionsDelete(DeleteView):
     model = Questions
     success_url = '/questions'
+@method_decorator(login_required, name='dispatch')
 class CategoryDelete(DeleteView):
     model = Category
     success_url = '/category'
+
+@login_required
 def category(request):
     categories = []
     cat=''
@@ -84,6 +96,7 @@ def category(request):
     return render(request,'index.html',{
         'categories' : cate
     })
+@login_required
 def levels(request,id):
     return render(request,'levels.html',{'id':id})
 def login_view(request):
@@ -122,13 +135,13 @@ def signup(request):
         form = CreateUserForm()
         return render(request, 'signup.html', {'form': form})
 
-
+@login_required
 def Profile(request, username):
     user = User.objects.get(username=username)
     quiz = Quiz.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
 
-
+@login_required
 def question(request,category_num,dif):
     options=set()
     response = requests.get('https://opentdb.com/api.php?amount=5&category={}&difficulty={}&type=multiple'.format(category_num,dif))
@@ -184,6 +197,7 @@ def html_decode(s):
     for code in htmlCodes:
         s = s.replace(code[1], code[0])
     return s
+@login_required
 def result(request,no,category):
     current_user = request.user
     c = Category.objects.get(name=category)
@@ -196,6 +210,7 @@ def result(request,no,category):
         'no':no,
         'category':category
     })
+@login_required
 def top_five(request):
     users = Score.objects.order_by('-score')
     print("200",users[0])
@@ -207,7 +222,7 @@ def top_five(request):
         'user5':users[4],
         })
 
-
+@login_required
 def result(request,score,category):
     current_user = request.user
     user_id = current_user.id
@@ -232,7 +247,7 @@ def result(request,score,category):
         'no':score,
         'category':category
     })
-
+@login_required
 def top_five(request,category):
     score = []
     users1=[]
@@ -282,7 +297,7 @@ def top_five(request,category):
         'score5':score[4]
         })
 
-
+@login_required
 def category_top_five(request):
     cate = []
     id_response = requests.get('https://opentdb.com/api_category.php')
@@ -293,11 +308,11 @@ def category_top_five(request):
     return render(request,'category_top_five.html',{
         'categories': cate
     })
-
+@login_required
 def sei(request):
     q=Questions.objects.all()
 
     return render(request,'test.html',{
-        'q':q 
+        'q':q
     })
 
