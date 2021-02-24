@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,9 +8,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WelCome</title>
+      <!-- Template Main CSS File -->
+     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 </head>
-<body>
-    <h2>Hello, WelCome to QuizApp</h2>
+<body>   
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container d-flex flex-column align-items-center justify-content-center" data-aos="fade-up">
+      <h1>Welcome To Our Quiz  app</h1>
+      <h2> Challenge your Self & Put Your Knowledge To The Test With This Fun Quiz!  </h2>
+      <a href="{% url 'login' %}" class="btn-get-started scrollto">Sign in</a>
+      <img src="{% static 'assets/img/hero-img.png' %}" class="img-fluid hero-img" alt="" data-aos="zoom-in" data-aos-delay="150">
+    </div>
+
+  </section><!-- End Hero -->
+  
 </body>
 </html>
 {% endblock %}
