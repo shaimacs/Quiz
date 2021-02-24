@@ -1,7 +1,7 @@
-### A Quiz Website
+## A Quiz Website
 Quiz website allows the user to select their favorite category to take quick quiz in. 
 The user is able to select the level of the quiz and see his results.
-The admin is able to add new Quiz Category with the levels, Qusestions and delete Quiz.
+The admin is able to add new Quiz Category with the levels, , Update it and delete Quiz.
 <br>
 
 ## Getting Started
@@ -27,7 +27,7 @@ to start your server.<br>
 <br><br>
 
 
-### User Stories 
+## User Stories 
 -The user should be able to sign up. <br>
 -The user should be able to login. <br>
 -The user should be able to reset the password.<br>
@@ -36,7 +36,7 @@ to start your server.<br>
 -The user should be able to see the result of the quiz.<br>
 -The user should be able to see the top 5 competitors.<br>
 -The admin should be able to do add a new Quiz.<br>
--The admin should be able to edit the quiz.<br>
+-The admin should be able to update the quiz.<br>
 -The admin should be able to delete the quiz.<br>
 
 
@@ -46,9 +46,9 @@ to start your server.<br>
 |<img src = "Images/categeory.jpeg" > | <img src = "Images/levels.jpeg" width="100%">| <img src = "Images/questions.jpeg" width="100%"> | <img src = "Images/result.jpeg" width="100%"> | <img src = "Images/Top Five.jpeg" width="100%">
 
 ## ERD 
-| Category page        
+| ERD        
 |------------|
-|<img src = "Images/categeory.jpeg" > | 
+|<img src = "Images/ERD.jpg" height ="50%" width ="50%" > | 
 
 
 ## Folder Structure 
@@ -75,13 +75,15 @@ to start your server.<br>
 |   |   |   ├── levels.html            
 |   |   │   ├── login.html             
 |   |   │   ├── password_reset_complete.html             
-|   |   │   ├── password_reset_confirm.html      
+|   |   │   ├── password_reset_confirm.html    
+|   |   │   ├── password_reset_done.html   
 |   |   │   |── password_reset_email.html
 |   |   |   ├── password_reset_form.html           
 |   |   │   ├── profile.html           
 |   |   │   ├── Questions.html             
 |   |   │   ├── Result.html      
 |   |   │   ├── signup.html  
+|   |   │   ├── test.html 
 |   |   │   ├── top.html   
 |   |   │   └── welcome.html
 │   |   ├── models.py
@@ -98,16 +100,18 @@ to start your server.<br>
 Either download the project or [Use it online](https://brain-quizy.herokuapp.com/)
 <br><br><br>
 
-### Technologies Used :
+## Technologies Used :
 - HTML.
 - CSS.
 - Django. 
 - Python. 
 - Bootstrap.
 - Postgres.
+- AJAX.
+
 <br>
 
-### API :
+## API :
 [Api Link](https://opentdb.com/api_config.php)
 
 ## Run Requirement:
@@ -115,26 +119,20 @@ All application components are usable across modern desktop, tablet and phone br
 <br>
 
 
-# Features
-- [x] .
-
-<br><br><br>
-
-
-### Future Features: 
-- []. 
+## Future Features: 
+- [ ] Add a Timer to the Quiz. 
+- [x] Add win streak bonus. 
+- [ ] . 
  
 
 
-# Team Members:
-
+## Team Members:
 [Faisal Alsagri](https://git.generalassemb.ly/faisalabdulaziz)\
 [Dhuha Ahmad](https://git.generalassemb.ly/dhuhaahmad)\
 [Ola Altalhi](https://git.generalassemb.ly/olaaltalhi)\
 [Shaima Alshammary](https://git.generalassemb.ly/shaimacs)
 
-# Special thanks:
-
+## Special thanks:
 Many many thanks to: JRJS\
 [Mohammad Jouza](https://git.generalassemb.ly/MohammadJouza)\
 [Raymond](https://git.generalassemb.ly/raymond)\
@@ -143,5 +141,8 @@ Many many thanks to: JRJS\
 [Sara Kuddah]
 
 
-### Resourses 
+## Resourses 
 - [Stackoverflow](https://stackoverflow.com/).
+- [Django Documenations](https://docs.djangoproject.com/en/3.1/).
+- [Bootstrap](https://getbootstrap.com/).
+- [W3School](w3schools.com/).
