@@ -92,7 +92,6 @@ def category(request):
         cate.append({'name':i["name"],'id':i["id"]})
     # for i in cate:
     #     Category.objects.create(name=i['name'])
-           
     return render(request,'index.html',{
         'categories' : cate
     })
@@ -140,7 +139,7 @@ def Profile(request, username):
     user = User.objects.get(username=username)
     quiz = Quiz.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
-
+r
 @login_required
 def question(request,category_num,dif):
     options=set()
@@ -228,21 +227,17 @@ def result(request,score,category):
     user_id = current_user.id
     c = Category.objects.get(name=category)
     c_id = c.id
-
     #check if user is exist 
     if(Score.objects.filter(Q(user_id=user_id), Q(category_id = c_id)).exists()):
         #update user's score
         e = Score.objects.get(Q(user_id=user_id), Q(category_id = c_id))
         new_score = e.score + score
         Score.objects.filter(Q(user_id=user_id), Q(category_id = c_id)).update(score=new_score)
-
     else:
          #update score table 
         u=User.objects.get(id=user_id)
         cat=Category.objects.get(id=c_id)
-
         Score.objects.create(score= score,category = cat , user=u)
-
     return render(request, 'Result.html',{
         'no':score,
         'category':category
@@ -255,32 +250,22 @@ def top_five(request,category):
     c_id = c.id
     try:
         users = Score.objects.order_by('-score').filter(category_id = c_id)
-
     except IndexError:
         for u in range(5):
             users1.append('hhhhhh ')
- 
     user = User.objects.all()
     for i in range(5):
         try:
-            
             score.append(users[i].score)
             print(score)
             print(user)
         except IndexError:
             score.append(0)
-
-
     for i in range(len(users)):
         users1.append(users[i])
-
     for i in range(5-len(users)):
         users1.append('')
-    
-
-
     # if(len(users) <5):
-
     #     users=users1
     # print('257',users)
     return render(request, 'top.html',{
@@ -304,15 +289,15 @@ def category_top_five(request):
     id_res =json.loads(id_response.text)
     for i in id_res['trivia_categories']:
         cate.append({'name':i["name"],'id':i["id"]})
-
     return render(request,'category_top_five.html',{
         'categories': cate
     })
 @login_required
 def sei(request):
     q=Questions.objects.all()
-
     return render(request,'test.html',{
         'q':q
+
     })
+
 
