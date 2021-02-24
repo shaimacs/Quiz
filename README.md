@@ -52,48 +52,48 @@ to start your server.<br>
 ### Folder Structure 
 ```
 ├── Quiz
-│   └── main_app
-│       ├── components
-│       ├── __pycache__
-│       ├── migrations
-│       ├── static
-│       │   └── style.css
-|       ├── templates
-|       |   ├── main_app  
-│       │       ├── forms.py
-│       │       ├── questions_confirm_delete.html
-│       │       ├── questions_form.html
-│       │       ├── questions_show.html
-│       │       ├── questions_update.html
-│       │       ├── quiz_confirm_delete.html
-│       │       ├── quiz_form.html           
-|       │   ├── quiz    
-│       │       ├── index.html
-│       │       ├── show.html          
-|       │   ├── base.html             
-|       │   ├── category_top_five.html           
-|       │   |── index.html
-|       |   ├── levels.html            
-|       │   ├── login.html             
-|       │   ├── password_reset_complete.html             
-|       │   ├── password_reset_confirm.html      
-|       │   |── password_reset_email.html
-|       |   ├── password_reset_form.html           
-|       │   ├── profile.html           
-|       │   ├── Questions.html             
-|       │   ├── Result.html      
-|       │   ├── signup.html  
-|       │   ├── top.html   
-|       │   └── welcome.html
-│       ├── models.py
-│       ├── urls.py
-│       └── views.py
+│   ├── main_app
+│   |   ├── __pycache__
+│   |   ├── migrations
+|   |   ├── templates
+|   |   |   ├── main_app  
+│   |   │       ├── forms.py
+│   |   │       ├── questions_confirm_delete.html
+│   |   │       ├── questions_form.html
+│   |   │       ├── questions_show.html
+│   |   │       ├── questions_update.html
+│   |   │       ├── quiz_confirm_delete.html
+│   |   │       ├── quiz_form.html           
+|   |   │   ├── quiz    
+│   |   │       ├── index.html
+│   |   │       ├── show.html          
+|   |   │   ├── base.html             
+|   |   │   ├── category_top_five.html           
+|   |   │   |── index.html
+|   |   |   ├── levels.html            
+|   |   │   ├── login.html             
+|   |   │   ├── password_reset_complete.html             
+|   |   │   ├── password_reset_confirm.html      
+|   |   │   |── password_reset_email.html
+|   |   |   ├── password_reset_form.html           
+|   |   │   ├── profile.html           
+|   |   │   ├── Questions.html             
+|   |   │   ├── Result.html      
+|   |   │   ├── signup.html  
+|   |   │   ├── top.html   
+|   |   │   └── welcome.html
+│   |   ├── models.py
+│   |   ├── urls.py
+│   |   └── views.py
+|   ├── static
+│   ├ └── style.css
+|   ├── manage.py
 ├── env
 ├── .gitignore
 └── README.md
 ```
 # Use
-Either download the project or [Use it online]()
+Either download the project or [Use it online](https://brain-quizy.herokuapp.com/)
 <br><br><br>
 
 ### Technologies Used :
