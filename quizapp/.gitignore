@@ -1,0 +1,12 @@
+quizapp/main_app/migrations/__pycache__/*
+quizapp/quizapp/__pycache__/*
+quizapp/main_app/__pycache__/*
+quizapp/main_app/migrations
+env
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+venv/
+.env
