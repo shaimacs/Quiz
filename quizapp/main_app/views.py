@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 import requests
 import json
@@ -33,6 +34,7 @@ class QuestionsCreate(CreateView):
     model = Questions
     fields = '__all__'
     success_url = '/questions'
+
 @method_decorator(login_required, name='dispatch')
 class CategoryCreate(CreateView):
     model = Category
@@ -139,7 +141,7 @@ def Profile(request, username):
     user = User.objects.get(username=username)
     quiz = Quiz.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
-r
+
 @login_required
 def question(request,category_num,dif):
     options=set()
@@ -299,5 +301,4 @@ def sei(request):
         'q':q
 
     })
-
 
