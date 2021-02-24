@@ -23,7 +23,7 @@
       </div>
       <div class="menu_item">
         <div class="row">
-          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+          <div class="AnswersD AnswersD1 col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
             <div style="
                 width: 95%;
                 font-weight: 600;
@@ -32,7 +32,7 @@
               <p id="ans1" id='click'> Loading... </p>
             </div>
           </div>
-          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+          <div class="AnswersD AnswersD2 col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
             <div style="
                 width: 95%;
                 font-weight: 600;
@@ -41,7 +41,7 @@
               <p id="ans2" id='click'> Loading... </p>
             </div>
           </div>
-          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+          <div class="AnswersD AnswersD3 col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
             <div style="
                 width: 95%;
                 font-weight: 600;
@@ -50,7 +50,7 @@
               <p id="ans3" id='click'> Loading... </p>
             </div>
           </div>
-          <div class=" AnswersD col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
+          <div class="AnswersD AnswersD4 col-12 col-sm-6 mb-3 d-flex justify-content-center align-items-center" id="AnswersDiv">
             <div style="
                 width: 95%;
                 font-weight: 600;
@@ -59,7 +59,6 @@
               <p id="ans4" id='click'> Loading... </p>
             </div>
           </div>
-          <p id='click'> </p>
           <!-- <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a> -->
           <a><button id="nextbtn" type="next" class="next round" style ="text-decoration: none;
             display: inline-block;
@@ -122,7 +121,7 @@
         diff = result.results[0].difficulty
         all = result.results
         $('#question')[0].innerHTML = all[0].question
-        $('#click')[0].innerHTML = all[0].correct_answer
+        
         var temp = ran()
         rann.push(temp)
         $('#ans' + temp)[0].innerHTML = all[0].correct_answer
@@ -155,7 +154,7 @@
       clicked()
       if (page <= 4) {
         $('#question')[0].innerHTML = all[page].question
-        $('#click')[0].innerHTML = all[page].correct_answer
+        
         var tempp = ran()
         rann.push(tempp)
         $('#ans' + tempp)[0].innerHTML = all[page].correct_answer
@@ -219,10 +218,17 @@
         console.log(done)
         $(this).addClass("wrong")
         $(".wrong div").css("background-color", "red");
+        for (let i = 1; i < 5; i++) {
+          if($('div.AnswersD'+i)[0].innerText == all[page - 1].correct_answer){
+            $('div.AnswersD'+i).addClass("correct")
+          }
+        }
+        $('.correct div').css("background-color", "green");
         // event.target.style.backgroundColor = 'Red';
         document.querySelector("#WrongAnswer").play()
         // location.reload();
       }
+
     } else {
       console.log("cant click again")
     }

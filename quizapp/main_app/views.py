@@ -196,49 +196,92 @@ def result(request,no,category):
         'no':no,
         'category':category
     })
-def top_five(request):
-    users = Score.objects.order_by('-score')
-    return render(request, 'top.html',{
-        'user1':users[0],
-        'user2':users[1],
-        'user3':users[2],
-        'user4':users[3],
-        'user5':users[4],
-        })
+# def top_five(request):
+#     users = Score.objects.order_by('-score')
+#     return render(request, 'top.html',{
+#         'user1':users[0],
+#         'user2':users[1],
+#         'user3':users[2],
+#         'user4':users[3],
+#         'user5':users[4],
+#         })
 
 
 def result(request,score,category):
     current_user = request.user
+    user_id = current_user.id
     c = Category.objects.get(name=category)
     c_id = c.id
-    Score.objects.filter(Q(user_id=current_user.id), Q(category_id = c_id)).update(score=score)
-    #to get user's score
-    e = Score.objects.get(Q(user_id=current_user.id), Q(category_id = c_id))
-    user_score = e.score
+
+    #check if user is exist 
+    if(Score.objects.filter(Q(user_id=user_id), Q(category_id = c_id)).exists()):
+        #update user's score
+        e = Score.objects.get(Q(user_id=user_id), Q(category_id = c_id))
+        new_score = e.score + score
+        Score.objects.filter(Q(user_id=user_id), Q(category_id = c_id)).update(score=new_score)
+
+    else:
+         #update score table 
+        u=User.objects.get(id=user_id)
+        cat=Category.objects.get(id=c_id)
+
+        Score.objects.create(score= score,category = cat , user=u)
+
     return render(request, 'Result.html',{
-        'no':user_score,
+        'no':score,
         'category':category
     })
+
 def top_five(request,category):
     score = []
+    users1=[]
     c = Category.objects.get(name=category)
     c_id = c.id
-    users = Score.objects.order_by('-score').filter(category_id = c_id)
+    try:
+        users = Score.objects.order_by('-score').filter(category_id = c_id)
+
+    except IndexError:
+        for u in range(5):
+            users1.append('hhhhhh ')
+ 
+    user = User.objects.all()
     for i in range(5):
-        score.append(users[i].score)
+        try:
+            
+            score.append(users[i].score)
+            print(score)
+            print(user)
+        except IndexError:
+            score.append(0)
+
+
+    for i in range(len(users)):
+        users1.append(users[i])
+
+    for i in range(5-len(users)):
+        users1.append('')
+    
+
+
+    # if(len(users) <5):
+
+    #     users=users1
+    # print('257',users)
     return render(request, 'top.html',{
         'category':category,
-        'user1':users[0],
+        'user1':users1[0],
         'score1':score[0],
-        'user2':users[1],
+        'user2':users1[1],
         'score2':score[1],
-        'user3':users[2],
+        'user3':users1[2],
         'score3':score[2],
-        'user4':users[3],
+        'user4':users1[3],
         'score4':score[3],
-        'user5':users[4],
+        'user5':users1[4],
         'score5':score[4]
         })
+
+
 def category_top_five(request):
     cate = []
     id_response = requests.get('https://opentdb.com/api_category.php')

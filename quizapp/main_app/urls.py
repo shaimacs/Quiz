@@ -29,9 +29,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html"),name='password_reset_confirm'),
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name="password_reset_complete.html"),name='password_reset_complete'),
     path('levels/<int:id>', views.levels, name='levels'),
-    # path('top_five/', views.top_five, name='top_five'),
     path('top_five/<category>', views.top_five, name='top_five'),
-    path('sei/', views.sei, name='sei'),
-    path('category_top_five/', views.category_top_five, name='category_top_five')
-
+    path('category_top_five/', views.category_top_five, name='category_top_five'),
+    path('sei/', views.sei, name='sei')
 ]
