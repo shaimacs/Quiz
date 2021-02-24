@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
 <body>
   <audio id="CorrectAnswer" src="https://www.dropbox.com/s/corq44j1xt6wmk3/water.mp3?dl=1"></audio>
   <audio id="WrongAnswer" src="https://www.dropbox.com/s/xxx4y9wbiabslrq/Tie.mp3?dl=1"></audio>
@@ -60,16 +59,12 @@
               <p id="ans4" id='click'> Loading... </p>
             </div>
           </div>
-          <!-- <p id='click'> {{ correct_answer }}</p> -->
           <p id='click'> </p>
-         
           <!-- <a href="/result/"><button type="submit" onclick=showPosition()> Submit</button></a> -->
           <a><button id="nextbtn" type="next" class="next round" style ="text-decoration: none;
             display: inline-block;
             padding: 8px 16px" onclick=next()> &#8250;</button></a>
           <!-- <a href="#" class="next round">&#8250;</a> -->
-
-
         </div>
       </div>
       <div class="row">
@@ -93,13 +88,12 @@
                   <div style="width: 150px; height: 150px;" class="m-auto">
                     <img style="width: 100%;" src="{% static 'help.jpg' %}" alt="img" />
                   </div>
-                  <p class="text-center font-weight-bold" style="margin-bottom: 0;">
+                  <h4 id="helpp" class="text-center font-weight-bold" style="margin-bottom: 0;">
                     Are you sure you need help?
-                  </p>
+                  </h4>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-success">Yes</button>                 
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                 
+                  <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>                
                 </div>
               </div>
             </div>
@@ -107,11 +101,9 @@
         </div>
       </div>
     </div>
-
 </body>
 </div>
 <script>
-
   const ran = () => {
     return Math.floor(1 + Math.random() * 4)
   }
@@ -174,10 +166,8 @@
             temp2 = ran()
           }
           rann.push(temp2)
-
           $('#ans' + temp2)[0].innerHTML = all[page].incorrect_answers[i]
         }
-
       }
       if (page >= 4) {
         $("#nextbtn")[0].innerHTML = "result"
@@ -189,7 +179,6 @@
     } else {
       alert("You have to choose an answer")
     }
-
   }
   // console.log('{{questions}}')
   var done = true;
@@ -213,11 +202,9 @@
           case "hard":
             score += 5
             break;
-
           default:
             break;
         }
-
         console.log('TRUE');
         console.log(this);
         $(this).addClass("correct")
@@ -225,7 +212,6 @@
         // event.target.style.backgroundColor = 'Green';
         // document.querySelector("#AnswersDiv").style.backgroundColor = 'Green';
         document.querySelector("#CorrectAnswer").play()
-
         // location.reload();
       }
       else {
@@ -236,7 +222,6 @@
         // event.target.style.backgroundColor = 'Red';
         document.querySelector("#WrongAnswer").play()
         // location.reload();
-
       }
     } else {
       console.log("cant click again")
@@ -251,11 +236,10 @@
   $('#help').click(function (event) {
     console.log($('div.AnswersD')[0].innerText)
     event.preventDefault();
-
-
     // if ( r != all[page].correct_answer) {
     console.log(r)
     // alert('wrong answer => '+ rr)
+    $('#helpp')[0].innerHTML = "don't choose => "+ all[page - 1].incorrect_answers[r]
     console.log('wrong answer => ', all[page - 1].incorrect_answers[r])
     // }
     // $.ajax({
@@ -265,14 +249,10 @@
     //   contentType: 'application/json; charset=utf-8',
     //   success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result.results) }
     // });
-
   })
-
   //  function showPosition(){
   //   var data = {"no": "800", "category": '{{category}}'};
   //     var token = '{{csrf_token}}';
-
-
   // $.ajax({
   //     headers: { "X-CSRFToken": token },
   //     type: 'POST',
@@ -280,15 +260,11 @@
   //     contentType: 'application/json; charset=utf-8',
   //     data: data,
   //     dataType: 'json',
-
   // });
   //   }
-
   for (let i = 1; i < 6; i++) {
     console.log("qqqqqqqqqqqqqqqqqqqqqqq", typeof ('{{qq}}'))
-
   }
-
   console.log('{{correct_answer}}')
   function showPosition() {
     var data = { no: 700 };
@@ -301,7 +277,6 @@
       contentType: 'application/json; charset=utf-8',
       success: function (result) { console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffffff', result) }
     });
-
     // $.ajax({
     //   // headers: { "X-CSRFToken": token },
     //   type: 'GET',
@@ -309,19 +284,14 @@
     //   contentType: 'application/json; charset=utf-8',
     //   data: data,
     //   dataType: 'text',
-
     // });
   }
-
-
   function showNext() {
     let hh = parseInt(window.location.pathname.slice(17, 19))
     let hr = 'http://127.0.0.1:8000/levels/question/' + (hh + 1) + '/hard'
     console.log("next", typeof (hh), hr, hr + 1)
     window.location.replace(hr);
   }
-
-
 // $(function () {
 //  var liftoffTime = new Date();
 //   liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, 26);

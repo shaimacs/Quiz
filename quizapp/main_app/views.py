@@ -144,7 +144,8 @@ def question(request,category_num,dif):
         'options':options,
         'correct_answer':res['results'][0]['correct_answer'],
         'category':res["results"][0]["category"],
-        'category_num':category_num
+        'category_num':category_num,
+        'dif':dif
         })
 # def question(request,category_num,dif):
 #     options=set()
@@ -189,10 +190,10 @@ def result(request,no,category):
     c_id = c.id
     Score.objects.filter(Q(user_id=current_user.id), Q(category_id = c_id)).update(score=no)
     #to get user's score
-    e = Score.objects.get(Q(user_id=current_user.id), Q(category_id = c_id))
-    score = e.score
+    # e = Score.objects.get(Q(user_id=current_user.id), Q(category_id = c_id))
+    # score = e.score
     return render(request, 'Result.html',{
-        'no':score,
+        'no':no,
         'category':category
     })
 def top_five(request):
