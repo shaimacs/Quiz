@@ -48,7 +48,7 @@ to start your server.<br>
 ## ERD 
 | ERD        
 |------------|
-|<img src = "Images/ERD.jpg" height ="50%" width ="50%" > | 
+|<img src = "Images/ERD.jpg" height ="50%" width = "100%" >
 
 
 ## Folder Structure 
@@ -122,7 +122,6 @@ All application components are usable across modern desktop, tablet and phone br
 ## Future Features: 
 - [ ] Add a Timer to the Quiz. 
 - [x] Add win streak bonus. 
-- [ ] . 
  
 
 
