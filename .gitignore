@@ -3,5 +3,10 @@ quizapp/quizapp/__pycache__/*
 quizapp/main_app/__pycache__/*
 quizapp/main_app/migrations
 env
-./env
-.\env
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+venv/
+.env
