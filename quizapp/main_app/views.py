@@ -196,15 +196,16 @@ def result(request,no,category):
         'no':no,
         'category':category
     })
-# def top_five(request):
-#     users = Score.objects.order_by('-score')
-#     return render(request, 'top.html',{
-#         'user1':users[0],
-#         'user2':users[1],
-#         'user3':users[2],
-#         'user4':users[3],
-#         'user5':users[4],
-#         })
+def top_five(request):
+    users = Score.objects.order_by('-score')
+    print("200",users[0])
+    return render(request, 'top.html',{
+        'user1':users[0],
+        'user2':users[1],
+        'user3':users[2],
+        'user4':users[3],
+        'user5':users[4],
+        })
 
 
 def result(request,score,category):

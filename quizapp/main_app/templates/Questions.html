@@ -121,7 +121,7 @@
         diff = result.results[0].difficulty
         all = result.results
         $('#question')[0].innerHTML = all[0].question
-        
+
         var temp = ran()
         rann.push(temp)
         $('#ans' + temp)[0].innerHTML = all[0].correct_answer
@@ -154,7 +154,6 @@
       clicked()
       if (page <= 4) {
         $('#question')[0].innerHTML = all[page].question
-        
         var tempp = ran()
         rann.push(tempp)
         $('#ans' + tempp)[0].innerHTML = all[page].correct_answer
