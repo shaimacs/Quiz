@@ -40,16 +40,18 @@ to start your server.<br>
 -The admin should be able to delete the quiz.<br>
 
 
-### WireFrames
-> WireFrame.
-
+## WireFrames
 | Category page      | Levels page      | Questions Page      | Result Page      | Top Five page      
 |------------|-------------|------------|-------------|------------
 |<img src = "Images/categeory.jpeg" > | <img src = "Images/levels.jpeg" width="100%">| <img src = "Images/questions.jpeg" width="100%"> | <img src = "Images/result.jpeg" width="100%"> | <img src = "Images/Top Five.jpeg" width="100%">
 
+## ERD 
+| Category page        
+|------------|
+|<img src = "Images/categeory.jpeg" > | 
 
 
-### Folder Structure 
+## Folder Structure 
 ```
 ├── Quiz
 │   ├── main_app
@@ -120,8 +122,8 @@ All application components are usable across modern desktop, tablet and phone br
 
 
 ### Future Features: 
-- [ ]. 
-- [x]. 
+- []. 
+ 
 
 
 # Team Members:

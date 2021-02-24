@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 import requests
 import json
@@ -23,18 +24,23 @@ def quiz_index(request):
 def quiz_show(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     return render(request, 'quiz/show.html', {'quiz': quiz})
+@method_decorator(login_required, name='dispatch')
 class QuizCreate(CreateView):
     model = Quiz
     fields = '__all__'
     success_url = '/quiz'
+@method_decorator(login_required, name='dispatch')
 class QuestionsCreate(CreateView):
     model = Questions
     fields = '__all__'
     success_url = '/questions'
+
+@method_decorator(login_required, name='dispatch')
 class CategoryCreate(CreateView):
     model = Category
     fields = '__all__'
     success_url = '/category'
+@method_decorator(login_required, name='dispatch')
 class QuizUpdate(UpdateView):
     model = Quiz
     fields = '__all__'
@@ -42,6 +48,7 @@ class QuizUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/quiz/' + str(self.object.pk))
+@method_decorator(login_required, name='dispatch')
 class QuestionsUpdate(UpdateView):
     model = Questions
     fields = '__all__'
@@ -50,6 +57,7 @@ class QuestionsUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/questions/')
 
+@method_decorator(login_required, name='dispatch')
 class CategoryUpdate(UpdateView):
     model = Category
     fields = '__all__'
@@ -57,18 +65,24 @@ class CategoryUpdate(UpdateView):
         self.object = form.save(commit=False)
         self.object.save()
         return HttpResponseRedirect('/category/' + str(self.object.pk))
+
 def questionsShow(request):
     questions = Questions.objects.all()
     return render(request, 'main_app/questions_show.html', {'questions': questions})
+@method_decorator(login_required, name='dispatch')
 class QuizDelete(DeleteView):
     model = Quiz
     success_url = '/quiz'
+@method_decorator(login_required, name='dispatch')
 class QuestionsDelete(DeleteView):
     model = Questions
     success_url = '/questions'
+@method_decorator(login_required, name='dispatch')
 class CategoryDelete(DeleteView):
     model = Category
     success_url = '/category'
+
+@login_required
 def category(request):
     categories = []
     cat=''
@@ -80,10 +94,10 @@ def category(request):
         cate.append({'name':i["name"],'id':i["id"]})
     # for i in cate:
     #     Category.objects.create(name=i['name'])
-           
     return render(request,'index.html',{
         'categories' : cate
     })
+@login_required
 def levels(request,id):
     return render(request,'levels.html',{'id':id})
 def login_view(request):
@@ -122,13 +136,13 @@ def signup(request):
         form = CreateUserForm()
         return render(request, 'signup.html', {'form': form})
 
-
+@login_required
 def Profile(request, username):
     user = User.objects.get(username=username)
     quiz = Quiz.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'quiz': quiz})
 
-
+@login_required
 def question(request,category_num,dif):
     options=set()
     response = requests.get('https://opentdb.com/api.php?amount=5&category={}&difficulty={}&type=multiple'.format(category_num,dif))
@@ -184,6 +198,7 @@ def html_decode(s):
     for code in htmlCodes:
         s = s.replace(code[1], code[0])
     return s
+@login_required
 def result(request,no,category):
     current_user = request.user
     c = Category.objects.get(name=category)
@@ -196,6 +211,7 @@ def result(request,no,category):
         'no':no,
         'category':category
     })
+@login_required
 def top_five(request):
     users = Score.objects.order_by('-score')
     print("200",users[0])
@@ -207,32 +223,28 @@ def top_five(request):
         'user5':users[4],
         })
 
-
+@login_required
 def result(request,score,category):
     current_user = request.user
     user_id = current_user.id
     c = Category.objects.get(name=category)
     c_id = c.id
-
     #check if user is exist 
     if(Score.objects.filter(Q(user_id=user_id), Q(category_id = c_id)).exists()):
         #update user's score
         e = Score.objects.get(Q(user_id=user_id), Q(category_id = c_id))
         new_score = e.score + score
         Score.objects.filter(Q(user_id=user_id), Q(category_id = c_id)).update(score=new_score)
-
     else:
          #update score table 
         u=User.objects.get(id=user_id)
         cat=Category.objects.get(id=c_id)
-
         Score.objects.create(score= score,category = cat , user=u)
-
     return render(request, 'Result.html',{
         'no':score,
         'category':category
     })
-
+@login_required
 def top_five(request,category):
     score = []
     users1=[]
@@ -240,32 +252,22 @@ def top_five(request,category):
     c_id = c.id
     try:
         users = Score.objects.order_by('-score').filter(category_id = c_id)
-
     except IndexError:
         for u in range(5):
             users1.append('hhhhhh ')
- 
     user = User.objects.all()
     for i in range(5):
         try:
-            
             score.append(users[i].score)
             print(score)
             print(user)
         except IndexError:
             score.append(0)
-
-
     for i in range(len(users)):
         users1.append(users[i])
-
     for i in range(5-len(users)):
         users1.append('')
-    
-
-
     # if(len(users) <5):
-
     #     users=users1
     # print('257',users)
     return render(request, 'top.html',{
@@ -282,22 +284,21 @@ def top_five(request,category):
         'score5':score[4]
         })
 
-
+@login_required
 def category_top_five(request):
     cate = []
     id_response = requests.get('https://opentdb.com/api_category.php')
     id_res =json.loads(id_response.text)
     for i in id_res['trivia_categories']:
         cate.append({'name':i["name"],'id':i["id"]})
-
     return render(request,'category_top_five.html',{
         'categories': cate
     })
-
+@login_required
 def sei(request):
     q=Questions.objects.all()
-
     return render(request,'test.html',{
-        'q':q 
+        'q':q
+
     })
 

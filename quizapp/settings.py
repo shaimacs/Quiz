@@ -94,7 +94,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Quiz',
         'USER': 'postgres',
+<<<<<<< HEAD:quizapp/settings.py
         'PASSWORD': 'Shaima1995'
+=======
+        'PASSWORD': '1234'
+
+>>>>>>> f5e7aad562e655a32791ca562c692ed162a1c541:quizapp/quizapp/settings.py
     }
 }
 
