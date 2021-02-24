@@ -96,7 +96,7 @@ to start your server.<br>
 ├── .gitignore
 └── README.md
 ```
-# Use
+## Use
 Either download the project or [Use it online](https://brain-quizy.herokuapp.com/)
 <br><br><br>
 
