@@ -1,7 +1,7 @@
 ## A Quiz Website
 Quiz website allows the user to select their favorite category to take quick quiz in. 
 The user is able to select the level of the quiz and see his results.
-The admin is able to add new Quiz Category with the levels, , Update it and delete Quiz.
+The admin is able to add new Quiz Category with the levels, Update it and delete Quiz.
 <br>
 
 ## Getting Started
@@ -36,8 +36,8 @@ to start your server.<br>
 -The user should be able to see the result of the quiz.<br>
 -The user should be able to see the top 5 competitors.<br>
 -The admin should be able to do add a new Quiz.<br>
--The admin should be able to update the quiz.<br>
--The admin should be able to delete the quiz.<br>
+-The admin should be able to update the Quiz.<br>
+-The admin should be able to delete the Quiz.<br>
 
 
 ## WireFrames
@@ -96,7 +96,7 @@ to start your server.<br>
 ├── .gitignore
 └── README.md
 ```
-# Use
+## Use
 Either download the project or [Use it online](https://brain-quizy.herokuapp.com/)
 <br><br><br>
 
@@ -122,10 +122,7 @@ All application components are usable across modern desktop, tablet and phone br
 ## Future Features: 
 - [ ] Add a Timer to the Quiz. 
 - [x] Add win streak bonus. 
-- [ ] . 
  
-
-
 ## Team Members:
 [Faisal Alsagri](https://git.generalassemb.ly/faisalabdulaziz)\
 [Dhuha Ahmad](https://git.generalassemb.ly/dhuhaahmad)\
