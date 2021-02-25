@@ -48,7 +48,7 @@ to start your server.<br>
 ## ERD 
 | ERD        
 |------------|
-|<img src = "Images/ERD.jpg" height ="50%" width ="50%" > | 
+|<img src = "Images/ERD.jpg" height ="50%" width = "100%" >
 
 
 ## Folder Structure 
@@ -113,10 +113,6 @@ Either download the project or [Use it online](https://brain-quizy.herokuapp.com
 
 ## API :
 [Api Link](https://opentdb.com/api_config.php)
-
-## Run Requirement:
-All application components are usable across modern desktop, tablet and phone browsers.
-<br>
 
 
 ## Future Features: 
