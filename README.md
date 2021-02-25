@@ -24,6 +24,22 @@ python manage.py runserver
 to start your server.<br>
 <br><br>
 
+## Technologies Used :
+- HTML.
+- CSS.
+- Django. 
+- Python. 
+- Bootstrap.
+- PgAdmin.
+- AJAX.
+- Trello. 
+
+## Use
+Either download the project or [Use it online](https://brain-quizy.herokuapp.com/)
+<br><br><br>
+
+## API :
+[Api Link](https://opentdb.com/api_config.php)
 
 ## User Stories 
 -The user should be able to sign up. <br>
@@ -94,24 +110,7 @@ to start your server.<br>
 ├── .gitignore
 └── README.md
 ```
-## Use
-Either download the project or [Use it online](https://brain-quizy.herokuapp.com/)
-<br><br><br>
 
-## Technologies Used :
-- HTML.
-- CSS.
-- Django. 
-- Python. 
-- Bootstrap.
-- PgAdmin.
-- AJAX.
-- Trello. 
-
-<br>
-
-## API :
-[Api Link](https://opentdb.com/api_config.php)
 
 
 ## Future Features: 
