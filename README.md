@@ -104,8 +104,9 @@ Either download the project or [Use it online](https://brain-quizy.herokuapp.com
 - Django. 
 - Python. 
 - Bootstrap.
-- Postgres.
+- PgAdmin.
 - AJAX.
+- Trello. 
 
 <br>
 
